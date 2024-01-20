@@ -1,0 +1,52 @@
+.trh-request-form .trh-flex-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.trh-request-form .trh-input-control {
+    display: block;
+    padding: 10px 5px;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    width: 100%;
+}
+
+label .trh-required {
+    color: #d40000;
+}
+
+#trhrf_start_time, #trhrf_end_time {
+    width: 120px;
+}
+
+.trh-button {
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: 1px #ccc solid;
+}
+
+.trh-button:hover {
+    cursor: pointer;
+}
+
+.trh-alert {
+    background-color: #ccc;
+    padding: 10px 20px;
+    border-left: 3px #aaa solid;
+}
+
+.trh-error-alert {
+    background-color: #f8d7da;
+    border-left-color: #842029;
+}
+
+.trh-success-alert {
+    background-color: #d1e7dd;
+    border-left-color: #0f5132;
+}
+
+@media (min-width: 576px) {
+    #trhrf_start_time, #trhrf_end_time {
+        width: 100%;
+    }
+}
