@@ -16,8 +16,8 @@
   */
 const PLUGIN_NAME = 'therentalshub-request';
 const NONCE_CONTEXT = 'XVGBkdV8tL';
-//const CARS_API_ENDPOINT = 'https://public-gateway:8001/booking';
-const CARS_API_ENDPOINT = 'https://web-api.therentalshub.com/booking';
+const CARS_API_ENDPOINT = 'http://fleet-haproxy-public:9015/requests';
+//const CARS_API_ENDPOINT = 'https://web-api.therentalshub.com/requests';
 
 /**
  * Settings.
@@ -273,10 +273,10 @@ function ajax_get_cars()
    $options = null;
 
    // request cars
-   $response = wp_remote_get(CARS_API_ENDPOINT.'/cars/list', [
+   $response = wp_remote_get(CARS_API_ENDPOINT.'/cars', [
       'headers' => [
+         'Content-Type' => 'application/json',
          'X-Api-Key' => $apiKey,
-         'Content-Type' => 'application/json'
       ]
    ]);
 
@@ -347,10 +347,10 @@ function processRequest($vars)
    $json = json_encode($vars, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
    // send to api
-   $response = wp_remote_post(CARS_API_ENDPOINT.'/requests', [
+   $response = wp_remote_post(CARS_API_ENDPOINT, [
       'headers' => [
-         'X-Api-Key' => $apiKey,
-         'Content-Type' => 'application/json'
+         'Content-Type' => 'application/json',
+         'X-Api-Key' => $apiKey
       ],
       'body' => $json
    ]);
