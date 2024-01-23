@@ -362,7 +362,9 @@ function processRequest($vars)
    }
 
    // send email to user
-   wp_mail($vars->email, __('Your booking request confirmation', 'trh'), emailTemplate($vars));
+   wp_mail($vars->email, __('Your booking request confirmation', 'trh'), emailTemplate($vars), [
+      'Content-Type: text/html; charset=UTF-8'
+   ]);
 
    // done
    return '';
