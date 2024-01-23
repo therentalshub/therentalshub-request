@@ -16,8 +16,8 @@
   */
 const PLUGIN_NAME = 'therentalshub-request';
 const NONCE_CONTEXT = 'XVGBkdV8tL';
-const CARS_API_ENDPOINT = 'http://fleet-haproxy-public:9015/requests';
-//const CARS_API_ENDPOINT = 'https://web-api.therentalshub.com/requests';
+//const CARS_API_ENDPOINT = 'http://fleet-haproxy-public:9015/requests';
+const CARS_API_ENDPOINT = 'https://web-api.therentalshub.com/requests';
 
 /**
  * Settings.
