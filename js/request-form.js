@@ -142,7 +142,7 @@ var trhRequestForm = (function($) {
                 
                 carEl.append($('<option>', {
                     value: data[i].id,
-                    text: data[i].brand_name + ' ' + data[i].model_name
+                    text: data[i].brand + ' ' + data[i].model + ' - ' + data[i].gear
                 }));
             }
         });

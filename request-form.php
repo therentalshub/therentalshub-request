@@ -65,7 +65,7 @@
 
             <div class="row mb-4">
                 <div class="col">
-                    <label for="trhrf_notes">Request additional notes</label>
+                    <label for="trhrf_notes">Additional notes</label>
                     <textarea class="trh-input-control" rows="5" name="trhrf_notes" id="trhrf_notes"></textarea>
                 </div>
             </div>
