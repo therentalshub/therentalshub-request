@@ -3,7 +3,7 @@
  * Plugin Name: TheRentalsHub Request
  * Plugin URI: https://www.therentalshub.com
  * Description: Capture booking requests
- * Version: 1.0.3
+ * Version: 1.0.4
  * Requires PHP: 8.0
  * Author: The Rentals Hub
  * License: MIT
@@ -272,6 +272,13 @@ function ajax_get_cars()
    $apiKey = $options['trh_api_key'];
    $options = null;
 
+   if (check_ajax_referer(NONCE_CONTEXT) === false) {
+
+      echo '{"error":"'.$error.'"}';
+      
+      wp_die();
+   }
+
    // request cars
    $response = wp_remote_get(CARS_API_ENDPOINT.'/cars', [
       'headers' => [
@@ -297,7 +304,17 @@ function ajax_get_cars()
  */
 function ajax_submit_form()
 {
+   // generic error
+   $error = __('Request registration is currently not available', 'trh');
+
    header('Content-Type: application/json', true);
+
+   if (check_ajax_referer(NONCE_CONTEXT) === false) {
+
+      echo '{"error":"'.$error.'"}';
+      
+      wp_die();
+   }
 
    if(($result = processRequest((object) $_POST)) != '') {
 
