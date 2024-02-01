@@ -3,7 +3,7 @@
  * Plugin Name: TheRentalsHub Request
  * Plugin URI: https://www.therentalshub.com
  * Description: Capture booking requests
- * Version: 1.0.4
+ * Version: 1.0.5
  * Requires PHP: 8.0
  * Author: The Rentals Hub
  * License: MIT
@@ -65,6 +65,30 @@ function trh_settings_init()
 		'trh_section_req_form_settings',
 		[
          'label_for' => 'trh_show_cars',
+			'class' => 'trh_row'
+      ]
+	);
+
+   add_settings_field(
+		'trh_show_locations',
+      __('Show locations selector', 'trh'),
+		'trh_show_locations_cb',
+		'trh',
+		'trh_section_req_form_settings',
+		[
+         'label_for' => 'trh_show_locations',
+			'class' => 'trh_row'
+      ]
+	);
+
+   add_settings_field(
+		'trh_send_email',
+      __('Send confirmation email', 'trh'),
+		'trh_send_email_cb',
+		'trh',
+		'trh_section_req_form_settings',
+		[
+         'label_for' => 'trh_send_email',
 			'class' => 'trh_row'
       ]
 	);
@@ -133,6 +157,46 @@ function trh_show_cars_cb($args)
 	</select>
 	<p class="description">
 		<?php esc_html_e('Displays a list with cars from your fleet management account for selection.', 'trh'); ?>
+	</p>
+	<?php
+}
+
+function trh_show_locations_cb($args)
+{
+	$options = get_option('trh_options');
+   ?>
+	<select
+			id="<?php echo esc_attr( $args['label_for'] ); ?>" 
+			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]">
+		<option value="yes" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'yes', false ) ) : ( '' ); ?>>
+			<?php esc_html_e('Yes', 'trh'); ?>
+		</option>
+ 		<option value="no" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'no', false ) ) : ( '' ); ?>>
+			<?php esc_html_e('No', 'trh'); ?>
+		</option>
+	</select>
+	<p class="description">
+		<?php esc_html_e('Displays a list with pick-up locations from your fleet management account for selection.', 'trh'); ?>
+	</p>
+	<?php
+}
+
+function trh_send_email_cb($args)
+{
+	$options = get_option('trh_options');
+   ?>
+	<select
+			id="<?php echo esc_attr( $args['label_for'] ); ?>" 
+			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]">
+		<option value="yes" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'yes', false ) ) : ( '' ); ?>>
+			<?php esc_html_e('Yes', 'trh'); ?>
+		</option>
+ 		<option value="no" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'no', false ) ) : ( '' ); ?>>
+			<?php esc_html_e('No', 'trh'); ?>
+		</option>
+	</select>
+	<p class="description">
+		<?php esc_html_e('Send a confirmation email with the request details.', 'trh'); ?>
 	</p>
 	<?php
 }
@@ -233,6 +297,8 @@ function trh_request_form_shortcode()
 
    $trhShowCars = 'false';
 
+   $trhShowLocations = 'false';
+
    if (isset($options['trh_min_booking_period'])) {
       $trhMinDays = (int) $options['trh_min_booking_period'];
    }
@@ -245,6 +311,10 @@ function trh_request_form_shortcode()
 
    if (isset($options['trh_show_cars'])) {
       $trhShowCars = $options['trh_show_cars'] == 'yes' ? 'true' : 'false';
+   }
+
+   if (isset($options['trh_show_locations'])) {
+      $trhShowLocations = $options['trh_show_locations'] == 'yes' ? 'true' : 'false';
    }
 
    ob_start();
@@ -260,7 +330,7 @@ add_shortcode('trh_request_form', 'trh_request_form_shortcode');
 /**
  * AJAX handler for getting cars.
  */
-function ajax_get_cars()
+function ajax_therentalshub_get_cars()
 {
    // generic error
    $error = __('Request form is currently not available', 'trh');
@@ -300,9 +370,51 @@ function ajax_get_cars()
 }
 
 /**
+ * AJAX handler for getting locations.
+ */
+function ajax_therentalshub_get_locations()
+{
+   // generic error
+   $error = __('Request form is currently not available', 'trh');
+
+   header('Content-Type: application/json', true);
+
+   // get api key
+   $options = get_option('trh_options');
+   $apiKey = $options['trh_api_key'];
+   $options = null;
+
+   if (check_ajax_referer(NONCE_CONTEXT) === false) {
+
+      echo '{"error":"'.$error.'"}';
+      
+      wp_die();
+   }
+
+   // request cars
+   $response = wp_remote_get(CARS_API_ENDPOINT.'/locations', [
+      'headers' => [
+         'Content-Type' => 'application/json',
+         'X-Api-Key' => $apiKey,
+      ]
+   ]);
+
+   if ((int) $response['response']['code'] != 200) {
+
+      echo '{"error":"'.$error.'"}';
+
+      wp_die();
+   }
+
+   echo $response['body'];
+
+   wp_die();
+}
+
+/**
  * AJAX handler for submitted form.
  */
-function ajax_submit_form()
+function ajax_therentalshub_submit_form()
 {
    // generic error
    $error = __('Request registration is currently not available', 'trh');
@@ -329,11 +441,15 @@ function ajax_submit_form()
 }
 
 if ( is_admin() ) {
-   add_action('wp_ajax_nopriv_get_cars', 'ajax_get_cars');
-   add_action('wp_ajax_get_cars', 'ajax_get_cars');
 
-   add_action('wp_ajax_nopriv_submit_form', 'ajax_submit_form');
-   add_action('wp_ajax_submit_form', 'ajax_submit_form');
+   add_action('wp_ajax_nopriv_therentalshub_get_cars', 'ajax_therentalshub_get_cars');
+   add_action('wp_ajax_therentalshub_get_cars', 'ajax_therentalshub_get_cars');
+
+   add_action('wp_ajax_nopriv_therentalshub_get_locations', 'ajax_therentalshub_get_locations');
+   add_action('wp_ajax_therentalshub_get_locations', 'ajax_therentalshub_get_locations');
+
+   add_action('wp_ajax_nopriv_therentalshub_submit_form', 'ajax_therentalshub_submit_form');
+   add_action('wp_ajax_therentalshub_submit_form', 'ajax_therentalshub_submit_form');
 }
 
 /** 
@@ -343,8 +459,9 @@ function processRequest($vars)
 {
    // check for missing vars
    if (!isset($vars->sd) || !isset($vars->st) || !isset($vars->ed) || !isset($vars->et) 
-      || !isset($vars->car) || !isset($vars->fname) || !isset($vars->lname) 
-         || !isset($vars->email) || !isset($vars->phone) || !isset($vars->notes) || !isset($vars->carname)) {
+      || !isset($vars->car) || !isset($vars->loc) || !isset($vars->fname) || !isset($vars->lname) 
+         || !isset($vars->email) || !isset($vars->phone) || !isset($vars->notes) 
+            || !isset($vars->carname) || !isset($vars->locname)) {
 
       return __('Missing vars, cannot continue', 'trh');
    }
@@ -379,9 +496,12 @@ function processRequest($vars)
    }
 
    // send email to user
-   wp_mail($vars->email, __('Your booking request confirmation', 'trh'), emailTemplate($vars), [
-      'Content-Type: text/html; charset=UTF-8'
-   ]);
+   if ($options['trh_send_email'] == 'yes') {
+
+      wp_mail($vars->email, __('Your booking request confirmation', 'trh'), emailTemplate($vars), [
+         'Content-Type: text/html; charset=UTF-8'
+      ]);
+   }
 
    // done
    return '';

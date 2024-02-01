@@ -28,8 +28,17 @@
 
             <div class="row mb-4" style="display:none" id="trhrf_car_wrap">
                 <div class="col">
-                    <label for="trhrf_car">Choose vehicle <span class="trh-required">*</span></label>
+                    <label for="trhrf_car">Choose vehicle</label>
                     <select class="trh-input-control" name="trhrf_car" id="trhrf_car" required>
+                        <option value="0"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-4" style="display:none" id="trhrf_location_wrap">
+                <div class="col">
+                    <label for="trhrf_loc">Choose pick-up location</label>
+                    <select class="trh-input-control" name="trhrf_loc" id="trhrf_loc" required>
                         <option value="0"></option>
                     </select>
                 </div>
@@ -87,6 +96,7 @@
             <div class="row">
                 <div class="col">
                     <input type="hidden" name="trhrf_car_name" id="trhrf_car_name" value="">
+                    <input type="hidden" name="trhrf_loc_name" id="trhrf_loc_name" value="">
                     <button type="submit" class="trh-button">Submit booking request</button>
                 </div>
             </div>
@@ -96,7 +106,8 @@
             var trhApp = {
                 minDays: <?=$trhMinDays;?>,
                 defaultTime: "<?=$trhDefaultTime;?>",
-                showCars: <?=$trhShowCars;?>
+                showCars: <?=$trhShowCars;?>,
+                showLocations: <?=$trhShowLocations;?>
             };
         </script>
 

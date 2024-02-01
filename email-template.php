@@ -17,6 +17,12 @@
                 <td><?=htmlentities($vars->carname, ENT_QUOTES);?></td>
             </tr>
             <?php endif; ?>
+            <?php if ($vars->loc != 0): ?>
+            <tr>
+                <th>Pick-up location</th>
+                <td><?=htmlentities($vars->locname, ENT_QUOTES);?></td>
+            </tr>
+            <?php endif; ?>
             <tr>
                 <th>Customer</th>
                 <td><?=htmlentities($vars->fname, ENT_QUOTES);?> <?=htmlentities($vars->lname, ENT_QUOTES);?></td>

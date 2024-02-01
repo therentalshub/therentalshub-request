@@ -8,17 +8,24 @@ var trhRequestForm = (function($) {
     var endDateEl = null;
     var endTimeEl = null;
     var carEl = null;
+    var locEl = null;
     var fnameEl = null;
     var lnameEl = null;
     var emailEl = null;
     var phoneEl = null;
     var notesEl =null;
     var carNameEl = null; // is hidden input
+    var locNameEl = null; // is hidden input
 
     /**
      * Box wrapper div for cars select.
      */
     var carWrapEl = null;
+
+      /**
+     * Box wrapper div for locations select.
+     */
+      var locWrapEl = null;
 
     /**
      * The form.
@@ -55,20 +62,28 @@ var trhRequestForm = (function($) {
         endDateEl = $('#trhrf_end_date');
         endTimeEl = $('#trhrf_end_time');
         carEl = $('#trhrf_car');
+        locEl = $('#trhrf_loc');
         fnameEl = $('#trhrf_fname');
         lnameEl = $('#trhrf_lname');
         emailEl = $('#trhrf_email');
         phoneEl = $('#trhrf_phone');
         notesEl = $('#trhrf_notes');
         carNameEl = $('#trhrf_car_name');
+        locNameEl = $('#trhrf_loc_name');
         
         carWrapEl = $('#trhrf_car_wrap');
+        locWrapEl = $('#trhrf_location_wrap');
 
         form = $('#trh-request-form');
 
         // set event that sets hidden field with car name
         carEl.on('change', function() {
             carNameEl.val(carEl.find('option:selected').text());
+        });
+
+        // set event that sets hidden field with location name
+        locEl.on('change', function() {
+            locNameEl.val(locEl.find('option:selected').text());
         });
     };
 
@@ -131,7 +146,7 @@ var trhRequestForm = (function($) {
         $.post(my_ajax_obj.ajax_url, {
 
             _ajax_nonce: my_ajax_obj.nonce,
-            action: 'get_cars',
+            action: 'therentalshub_get_cars',
         }, function(data) {
 
             if (Object.hasOwn(data, 'error')) {
@@ -149,14 +164,45 @@ var trhRequestForm = (function($) {
     };
 
     /**
+     * Load cars.
+     */
+    var loadLocations = function() {
+
+        if (!trhApp.showLocations) {
+            return;
+        }
+
+        locWrapEl.css('display', 'block');
+
+        // get from api
+        $.post(my_ajax_obj.ajax_url, {
+
+            _ajax_nonce: my_ajax_obj.nonce,
+            action: 'therentalshub_get_locations',
+        }, function(data) {
+
+            if (Object.hasOwn(data, 'error')) {
+                return;
+            }
+
+            for (i = 0; i < data.length; i++) {
+                
+                locEl.append($('<option>', {
+                    value: data[i].id,
+                    text: data[i].name
+                }));
+            }
+        });
+    };
+
+    /**
      * Submit form.
      */
     var submitForm = function() {
 
         // all needed vars filled?
         if (startDateEl.val() === '' || startTimeEl.val() === '' || endDateEl.val() === '' 
-            || endTimeEl.val() === '' || carEl.val() === '' || fnameEl.val() === '' 
-                || lnameEl.val() === '' || emailEl.val() === '') {
+            || endTimeEl.val() === '' || fnameEl.val() === '' || lnameEl.val() === '' || emailEl.val() === '') {
             alert('Please fill all required (with the asterisk) fields.');
             return;
         }
@@ -173,18 +219,20 @@ var trhRequestForm = (function($) {
         $.post(my_ajax_obj.ajax_url, {
 
             _ajax_nonce: my_ajax_obj.nonce,
-            action: 'submit_form',
+            action: 'therentalshub_submit_form',
             sd: startDateEl.val(),
             st: startTimeEl.val(),
             ed: endDateEl.val(),
             et: endTimeEl.val(),
             car: carEl.val(),
+            loc: locEl.val(),
             fname: fnameEl.val(),
             lname: lnameEl.val(),
             email: emailEl.val(),
             phone: phoneEl.val(),
             notes: notesEl.val(),
-            carname: carNameEl.val()
+            carname: carNameEl.val(),
+            locname: locNameEl.val()
         }, function(data) {
 
             btn.html(btnHtml);
@@ -219,6 +267,9 @@ var trhRequestForm = (function($) {
 
         // load cars
         loadCars();
+
+        // load locations
+        loadLocations();
 
         // form submit event
         form.on('submit', function(e) {
