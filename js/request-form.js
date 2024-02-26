@@ -16,16 +16,22 @@ var trhRequestForm = (function($) {
     var notesEl =null;
     var carNameEl = null; // is hidden input
     var locNameEl = null; // is hidden input
+    var flightNameEl = null; // is hidden input
 
     /**
      * Box wrapper div for cars select.
      */
     var carWrapEl = null;
 
-      /**
+    /**
      * Box wrapper div for locations select.
      */
-      var locWrapEl = null;
+    var locWrapEl = null;
+
+    /**
+     * Box wrapper div for flight nr input.
+     */
+    var flightWrapEl = null;
 
     /**
      * The form.
@@ -70,9 +76,11 @@ var trhRequestForm = (function($) {
         notesEl = $('#trhrf_notes');
         carNameEl = $('#trhrf_car_name');
         locNameEl = $('#trhrf_loc_name');
+        flightNameEl = $('#trhrf_flight');
         
         carWrapEl = $('#trhrf_car_wrap');
         locWrapEl = $('#trhrf_location_wrap');
+        flightWrapEl = $('#trhrf_flight_wrap');
 
         form = $('#trh-request-form');
 
@@ -196,6 +204,18 @@ var trhRequestForm = (function($) {
     };
 
     /**
+     * Show/hide flight number field.
+     */
+    var loadFlightNr = function() {
+
+        if (!trhApp.showFlightNr) {
+            return;
+        }
+
+        flightWrapEl.css('display', 'block');
+    };
+
+    /**
      * Submit form.
      */
     var submitForm = function() {
@@ -232,7 +252,8 @@ var trhRequestForm = (function($) {
             phone: phoneEl.val(),
             notes: notesEl.val(),
             carname: carNameEl.val(),
-            locname: locNameEl.val()
+            locname: locNameEl.val(),
+            flightname: flightNameEl.val()
         }, function(data) {
 
             btn.html(btnHtml);
@@ -270,6 +291,9 @@ var trhRequestForm = (function($) {
 
         // load locations
         loadLocations();
+
+        // flight number fiuld
+        loadFlightNr();
 
         // form submit event
         form.on('submit', function(e) {

@@ -3,7 +3,7 @@
  * Plugin Name: TheRentalsHub Request
  * Plugin URI: https://www.therentalshub.com
  * Description: Capture booking requests
- * Version: 1.0.5
+ * Version: 1.0.6
  * Requires PHP: 8.0
  * Author: The Rentals Hub
  * License: MIT
@@ -14,10 +14,11 @@
  /**
   * Globals.
   */
+const ENVIRONMENT = 'prod';
 const PLUGIN_NAME = 'therentalshub-request';
 const NONCE_CONTEXT = 'XVGBkdV8tL';
-//const CARS_API_ENDPOINT = 'http://fleet-haproxy-public:9015/requests';
-const CARS_API_ENDPOINT = 'https://web-api.therentalshub.com/requests';
+const API_ENDPOINT_DEV = 'http://fleet-haproxy-public:9015/requests';
+const API_ENDPOINT_PROD = 'https://web-api.therentalshub.com/requests';
 
 /**
  * Settings.
@@ -82,6 +83,18 @@ function trh_settings_init()
 	);
 
    add_settings_field(
+		'trh_show_flight_nr',
+      __('Show flight number field', 'trh'),
+		'trh_show_flight_nr_cb',
+		'trh',
+		'trh_section_req_form_settings',
+		[
+         'label_for' => 'trh_show_flight_nr',
+			'class' => 'trh_row'
+      ]
+	);
+
+   add_settings_field(
 		'trh_send_email',
       __('Send confirmation email', 'trh'),
 		'trh_send_email_cb',
@@ -89,6 +102,18 @@ function trh_settings_init()
 		'trh_section_req_form_settings',
 		[
          'label_for' => 'trh_send_email',
+			'class' => 'trh_row'
+      ]
+	);
+
+   add_settings_field(
+		'trh_notify_email',
+      __('Send confirmation email to', 'trh'),
+		'trh_notify_email_cb',
+		'trh',
+		'trh_section_req_form_settings',
+		[
+         'label_for' => 'trh_notify_email',
 			'class' => 'trh_row'
       ]
 	);
@@ -181,6 +206,26 @@ function trh_show_locations_cb($args)
 	<?php
 }
 
+function trh_show_flight_nr_cb($args)
+{
+	$options = get_option('trh_options');
+   ?>
+	<select
+			id="<?php echo esc_attr( $args['label_for'] ); ?>" 
+			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]">
+		<option value="yes" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'yes', false ) ) : ( '' ); ?>>
+			<?php esc_html_e('Yes', 'trh'); ?>
+		</option>
+ 		<option value="no" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'no', false ) ) : ( '' ); ?>>
+			<?php esc_html_e('No', 'trh'); ?>
+		</option>
+	</select>
+	<p class="description">
+		<?php esc_html_e('Displays a field to capture customer\'s filght number.', 'trh'); ?>
+	</p>
+	<?php
+}
+
 function trh_send_email_cb($args)
 {
 	$options = get_option('trh_options');
@@ -197,6 +242,20 @@ function trh_send_email_cb($args)
 	</select>
 	<p class="description">
 		<?php esc_html_e('Send a confirmation email with the request details.', 'trh'); ?>
+	</p>
+	<?php
+}
+
+function trh_notify_email_cb($args)
+{
+   $options = get_option('trh_options');
+   ?>
+	<input type="text" 
+			id="<?php echo esc_attr( $args['label_for'] ); ?>" 
+			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]" 
+         value="<?=(isset($options[$args['label_for']]) ? $options[$args['label_for']] : '');?>" style="width:350px"/>
+	<p class="description">
+		<?php esc_html_e('You will be notified to this email when a requests is submitted.', 'trh' ); ?>
 	</p>
 	<?php
 }
@@ -262,11 +321,15 @@ function trh_register_plugin_scripts()
 
    wp_enqueue_style('bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-grid.min.css');
 
-   wp_enqueue_style('bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-grid.min.css');
-
    wp_enqueue_style('flatpickr-css', 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css');
 
-   wp_enqueue_script('therentalshub-request-js', plugins_url(PLUGIN_NAME.'/js/request-form.js'), ['jquery'], false, false, ['strategy' => 'defer', 'in_footer' => true]);
+   $requestJs = 'request-form';
+
+   if (ENVIRONMENT != 'dev') {
+      $requestJs = 'request-form-dcYedk3a';
+   }
+
+   wp_enqueue_script('therentalshub-request-js', plugins_url(PLUGIN_NAME.'/js/'.$requestJs.'.js'), ['jquery'], false, false, ['strategy' => 'defer', 'in_footer' => true]);
 
    wp_enqueue_script('flatpickr-js', 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js');
 
@@ -299,6 +362,8 @@ function trh_request_form_shortcode()
 
    $trhShowLocations = 'false';
 
+   $trhShowFlightNr = 'false';
+
    if (isset($options['trh_min_booking_period'])) {
       $trhMinDays = (int) $options['trh_min_booking_period'];
    }
@@ -315,6 +380,10 @@ function trh_request_form_shortcode()
 
    if (isset($options['trh_show_locations'])) {
       $trhShowLocations = $options['trh_show_locations'] == 'yes' ? 'true' : 'false';
+   }
+
+   if (isset($options['trh_show_flight_nr'])) {
+      $trhShowFlightNr = $options['trh_show_flight_nr'] == 'yes' ? 'true' : 'false';
    }
 
    ob_start();
@@ -350,7 +419,7 @@ function ajax_therentalshub_get_cars()
    }
 
    // request cars
-   $response = wp_remote_get(CARS_API_ENDPOINT.'/cars', [
+   $response = wp_remote_get((ENVIRONMENT == 'dev' ? API_ENDPOINT_DEV : API_ENDPOINT_PROD).'/cars', [
       'headers' => [
          'Content-Type' => 'application/json',
          'X-Api-Key' => $apiKey,
@@ -392,7 +461,7 @@ function ajax_therentalshub_get_locations()
    }
 
    // request cars
-   $response = wp_remote_get(CARS_API_ENDPOINT.'/locations', [
+   $response = wp_remote_get((ENVIRONMENT == 'dev' ? API_ENDPOINT_DEV : API_ENDPOINT_PROD).'/locations', [
       'headers' => [
          'Content-Type' => 'application/json',
          'X-Api-Key' => $apiKey,
@@ -461,7 +530,7 @@ function processRequest($vars)
    if (!isset($vars->sd) || !isset($vars->st) || !isset($vars->ed) || !isset($vars->et) 
       || !isset($vars->car) || !isset($vars->loc) || !isset($vars->fname) || !isset($vars->lname) 
          || !isset($vars->email) || !isset($vars->phone) || !isset($vars->notes) 
-            || !isset($vars->carname) || !isset($vars->locname)) {
+            || !isset($vars->carname) || !isset($vars->locname) || !isset($vars->flightname)) {
 
       return __('Missing vars, cannot continue', 'trh');
    }
@@ -472,16 +541,18 @@ function processRequest($vars)
       return __('Invalid email address provided.', 'trh');
    }
 
-   // get api key
+   // get needed options
    $options = get_option('trh_options');
    $apiKey = $options['trh_api_key'];
+   $notifyUser = $options['trh_send_email'];
+   $notifyEmail = $options['trh_notify_email'];
    $options = null;
 
    // vars to json
    $json = json_encode($vars, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
    // send to api
-   $response = wp_remote_post(CARS_API_ENDPOINT, [
+   $response = wp_remote_post((ENVIRONMENT == 'dev' ? API_ENDPOINT_DEV : API_ENDPOINT_PROD), [
       'headers' => [
          'Content-Type' => 'application/json',
          'X-Api-Key' => $apiKey
@@ -496,11 +567,22 @@ function processRequest($vars)
    }
 
    // send email to user
-   if ($options['trh_send_email'] == 'yes') {
+   if ($notifyUser == 'yes') {
 
       wp_mail($vars->email, __('Your booking request confirmation', 'trh'), emailTemplate($vars), [
          'Content-Type: text/html; charset=UTF-8'
       ]);
+   }
+
+   // send email to admin
+   if ($notifyEmail != '') {
+
+      if (preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$/i', $notifyEmail)) {
+
+         wp_mail($notifyEmail, __('New booking request', 'trh'), emailTemplateAdmin($vars), [
+            'Content-Type: text/html; charset=UTF-8'
+         ]);
+      }
    }
 
    // done
@@ -508,12 +590,22 @@ function processRequest($vars)
 }
 
 /**
- * Creates email template.
+ * Creates email templates.
  */
 function emailTemplate($vars)
 {
    ob_start();
    require 'email-template.php';
+   $html = ob_get_contents();
+   ob_end_clean();
+
+   return $html;
+}
+
+function emailTemplateAdmin($vars)
+{
+   ob_start();
+   require 'email-template-admin.php';
    $html = ob_get_contents();
    ob_end_clean();
 

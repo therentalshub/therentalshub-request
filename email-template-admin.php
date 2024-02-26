@@ -1,6 +1,5 @@
 <div>
-    <p>Dear <?=htmlentities($vars->fname, ENT_QUOTES);?>,<br>thank you for your enquiry. We will check our availability and contact you as soon as possible with booking details.</p>
-    <p>Following are your request details.</p>
+    <p>New booking request.</p>
     <div style="margin-top:30px">
         <table cellpadding="5" style="text-align:left;border-spacing:10px;border:1px #ccc solid">
             <tr>

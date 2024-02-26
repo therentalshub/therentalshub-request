@@ -29,7 +29,7 @@
             <div class="row mb-4" style="display:none" id="trhrf_car_wrap">
                 <div class="col">
                     <label for="trhrf_car">Choose vehicle</label>
-                    <select class="trh-input-control" name="trhrf_car" id="trhrf_car" required>
+                    <select class="trh-input-control" name="trhrf_car" id="trhrf_car">
                         <option value="0"></option>
                     </select>
                 </div>
@@ -38,9 +38,16 @@
             <div class="row mb-4" style="display:none" id="trhrf_location_wrap">
                 <div class="col">
                     <label for="trhrf_loc">Choose pick-up location</label>
-                    <select class="trh-input-control" name="trhrf_loc" id="trhrf_loc" required>
+                    <select class="trh-input-control" name="trhrf_loc" id="trhrf_loc">
                         <option value="0"></option>
                     </select>
+                </div>
+            </div>
+
+            <div class="row mb-4" style="display:none" id="trhrf_flight_wrap">
+                <div class="col">
+                    <label for="trhrf_flight">Flight number</label>
+                    <input type="text" class="trh-input-control" name="trhrf_flight" id="trhrf_flight"/>
                 </div>
             </div>
 
@@ -107,7 +114,8 @@
                 minDays: <?=$trhMinDays;?>,
                 defaultTime: "<?=$trhDefaultTime;?>",
                 showCars: <?=$trhShowCars;?>,
-                showLocations: <?=$trhShowLocations;?>
+                showLocations: <?=$trhShowLocations;?>,
+                showFlightNr: <?=$trhShowFlightNr;?>,
             };
         </script>
 
