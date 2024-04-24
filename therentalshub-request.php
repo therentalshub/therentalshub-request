@@ -14,11 +14,11 @@
  /**
   * Globals.
   */
-const ENVIRONMENT = 'prod';
-const PLUGIN_NAME = 'therentalshub-request';
-const NONCE_CONTEXT = 'XVGBkdV8tL';
-const API_ENDPOINT_DEV = 'http://fleet-haproxy-public:9015/requests';
-const API_ENDPOINT_PROD = 'https://web-api.therentalshub.com/requests';
+const TRHBR_ENVIRONMENT = 'prod';
+const TRHBR_PLUGIN_NAME = 'therentalshub-request';
+const TRHBR_NONCE_CONTEXT = 'XVGBkdV8tL';
+const TRHBR_API_ENDPOINT_DEV = 'http://fleet-haproxy-public:9015/requests';
+const TRHBR_API_ENDPOINT_PROD = 'https://web-api.therentalshub.com/requests';
 
 /**
  * Settings.
@@ -317,7 +317,7 @@ function trh_options_page_html()
  */
 function trh_register_plugin_scripts()
 {
-   wp_enqueue_style('therentalshub-request-css', plugins_url(PLUGIN_NAME.'/css/request-form.css'));
+   wp_enqueue_style('therentalshub-request-css', plugins_url(TRHBR_PLUGIN_NAME.'/css/request-form.css'));
 
    wp_enqueue_style('bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-grid.min.css');
 
@@ -325,15 +325,15 @@ function trh_register_plugin_scripts()
 
    $requestJs = 'request-form';
 
-   if (ENVIRONMENT != 'dev') {
+   if (TRHBR_ENVIRONMENT != 'dev') {
       $requestJs = 'request-form-dcYedk3a';
    }
 
-   wp_enqueue_script('therentalshub-request-js', plugins_url(PLUGIN_NAME.'/js/'.$requestJs.'.js'), ['jquery'], false, false, ['strategy' => 'defer', 'in_footer' => true]);
+   wp_enqueue_script('therentalshub-request-js', plugins_url(TRHBR_PLUGIN_NAME.'/js/'.$requestJs.'.js'), ['jquery'], false, false, ['strategy' => 'defer', 'in_footer' => true]);
 
    wp_enqueue_script('flatpickr-js', 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js');
 
-   $nonce = wp_create_nonce(NONCE_CONTEXT);
+   $nonce = wp_create_nonce(TRHBR_NONCE_CONTEXT);
 
    wp_localize_script(
       'therentalshub-request-js',
@@ -411,7 +411,7 @@ function ajax_therentalshub_get_cars()
    $apiKey = $options['trh_api_key'];
    $options = null;
 
-   if (check_ajax_referer(NONCE_CONTEXT) === false) {
+   if (check_ajax_referer(TRHBR_NONCE_CONTEXT) === false) {
 
       echo '{"error":"'.$error.'"}';
       
@@ -419,7 +419,7 @@ function ajax_therentalshub_get_cars()
    }
 
    // request cars
-   $response = wp_remote_get((ENVIRONMENT == 'dev' ? API_ENDPOINT_DEV : API_ENDPOINT_PROD).'/cars', [
+   $response = wp_remote_get((TRHBR_ENVIRONMENT == 'dev' ? TRHBR_API_ENDPOINT_DEV : TRHBR_API_ENDPOINT_PROD).'/cars', [
       'headers' => [
          'Content-Type' => 'application/json',
          'X-Api-Key' => $apiKey,
@@ -453,7 +453,7 @@ function ajax_therentalshub_get_locations()
    $apiKey = $options['trh_api_key'];
    $options = null;
 
-   if (check_ajax_referer(NONCE_CONTEXT) === false) {
+   if (check_ajax_referer(TRHBR_NONCE_CONTEXT) === false) {
 
       echo '{"error":"'.$error.'"}';
       
@@ -461,7 +461,7 @@ function ajax_therentalshub_get_locations()
    }
 
    // request cars
-   $response = wp_remote_get((ENVIRONMENT == 'dev' ? API_ENDPOINT_DEV : API_ENDPOINT_PROD).'/locations', [
+   $response = wp_remote_get((TRHBR_ENVIRONMENT == 'dev' ? TRHBR_API_ENDPOINT_DEV : TRHBR_API_ENDPOINT_PROD).'/locations', [
       'headers' => [
          'Content-Type' => 'application/json',
          'X-Api-Key' => $apiKey,
@@ -490,7 +490,7 @@ function ajax_therentalshub_submit_form()
 
    header('Content-Type: application/json', true);
 
-   if (check_ajax_referer(NONCE_CONTEXT) === false) {
+   if (check_ajax_referer(TRHBR_NONCE_CONTEXT) === false) {
 
       echo '{"error":"'.$error.'"}';
       
@@ -552,7 +552,7 @@ function processRequest($vars)
    $json = json_encode($vars, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
    // send to api
-   $response = wp_remote_post((ENVIRONMENT == 'dev' ? API_ENDPOINT_DEV : API_ENDPOINT_PROD), [
+   $response = wp_remote_post((TRHBR_ENVIRONMENT == 'dev' ? TRHBR_API_ENDPOINT_DEV : TRHBR_API_ENDPOINT_PROD), [
       'headers' => [
          'Content-Type' => 'application/json',
          'X-Api-Key' => $apiKey
