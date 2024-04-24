@@ -3,7 +3,7 @@
  * Plugin Name: TheRentalsHub Request
  * Plugin URI: https://www.therentalshub.com
  * Description: Capture booking requests
- * Version: 1.0.6
+ * Version: 1.0.7
  * Requires PHP: 8.0
  * Author: The Rentals Hub
  * License: MIT
@@ -29,7 +29,7 @@ function trh_settings_init()
 
    add_settings_section(
       'trh_section_req_form_settings',
-      __('TheRentalsHub Request Form Options', 'trh'),
+      __('TheRentalsHub Booking Request Form Options', 'trh'),
       'trh_section_req_form_settings_callback',
       'trh'
    );
@@ -278,7 +278,7 @@ function trh_options_page()
 {
    add_menu_page(
       'TheRentalsHub',
-      'TheRentalsHub',
+      'TRH Bookings',
       'manage_options',
       'trh-request-form-options',
       'trh_options_page_html'
