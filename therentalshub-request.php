@@ -317,27 +317,29 @@ function trh_options_page_html()
  */
 function trh_register_plugin_scripts()
 {
-   wp_enqueue_style('therentalshub-request-css', plugins_url(TRHBR_PLUGIN_NAME.'/css/request-form.css'));
+   // css
+   wp_enqueue_style('therentalshub-request', plugins_url(TRHBR_PLUGIN_NAME.'/css/request-form.css'));
 
-   wp_enqueue_style('bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-grid.min.css');
+   wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-grid.min.css');
 
-   wp_enqueue_style('flatpickr-css', 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css');
-
+   wp_enqueue_style('flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css');
+   
+   // js
+   wp_enqueue_script('flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js', ['jquery'], false, ['in_footer' => true]);
+   
    $requestJs = 'request-form';
 
    if (TRHBR_ENVIRONMENT != 'dev') {
-      $requestJs = 'request-form-dcYedk3a';
+      $requestJs = 'request-form-d7Yewk3a';
    }
 
-   wp_enqueue_script('therentalshub-request-js', plugins_url(TRHBR_PLUGIN_NAME.'/js/'.$requestJs.'.js'), ['jquery'], false, false, ['strategy' => 'defer', 'in_footer' => true]);
-
-   wp_enqueue_script('flatpickr-js', 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js');
+   wp_enqueue_script('therentalshub-request', plugins_url(TRHBR_PLUGIN_NAME.'/js/'.$requestJs.'.js'), ['jquery', 'flatpickr'], false, ['strategy' => 'defer', 'in_footer' => true]);
 
    $nonce = wp_create_nonce(TRHBR_NONCE_CONTEXT);
 
    wp_localize_script(
-      'therentalshub-request-js',
-      'my_ajax_obj',
+      'therentalshub-request',
+      'trh_ajax_obj',
       [
          'ajax_url' => admin_url('admin-ajax.php'),
          'nonce' => $nonce,

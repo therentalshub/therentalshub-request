@@ -1,4 +1,4 @@
-var trhRequestForm = (function($) {
+var trhRequestForm = (function($, flatpickr) {
 
     /**
      * Form elements.
@@ -151,9 +151,9 @@ var trhRequestForm = (function($) {
         carWrapEl.css('display', 'block');
 
         // get from api
-        $.post(my_ajax_obj.ajax_url, {
+        $.post(trh_ajax_obj.ajax_url, {
 
-            _ajax_nonce: my_ajax_obj.nonce,
+            _ajax_nonce: trh_ajax_obj.nonce,
             action: 'therentalshub_get_cars',
         }, function(data) {
 
@@ -183,9 +183,9 @@ var trhRequestForm = (function($) {
         locWrapEl.css('display', 'block');
 
         // get from api
-        $.post(my_ajax_obj.ajax_url, {
+        $.post(trh_ajax_obj.ajax_url, {
 
-            _ajax_nonce: my_ajax_obj.nonce,
+            _ajax_nonce: trh_ajax_obj.nonce,
             action: 'therentalshub_get_locations',
         }, function(data) {
 
@@ -236,9 +236,9 @@ var trhRequestForm = (function($) {
         $('#trh-request-success-alert').css('display', 'none');
 
         // submit request
-        $.post(my_ajax_obj.ajax_url, {
+        $.post(trh_ajax_obj.ajax_url, {
 
-            _ajax_nonce: my_ajax_obj.nonce,
+            _ajax_nonce: trh_ajax_obj.nonce,
             action: 'therentalshub_submit_form',
             sd: startDateEl.val(),
             st: startTimeEl.val(),
@@ -305,12 +305,12 @@ var trhRequestForm = (function($) {
     };
 
     return {
-        init: function () {
+        init: function() {
             init();
         }
     };
-})(jQuery);
+})(jQuery, flatpickr);
 
-jQuery(document).ready(function($){
+jQuery(document).ready(function($) {
     trhRequestForm.init();
 });
