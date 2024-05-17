@@ -3,7 +3,7 @@
  * Plugin Name: TheRentalsHub Request
  * Plugin URI: https://www.therentalshub.com
  * Description: Capture booking requests
- * Version: 1.0.8
+ * Version: 1.0.9
  * Requires PHP: 8.0
  * Author: The Rentals Hub
  * License: MIT
@@ -21,6 +21,15 @@ const TRHBR_API_ENDPOINT_DEV = 'http://fleet-haproxy-public:9015/requests';
 const TRHBR_API_ENDPOINT_PROD = 'https://web-api.therentalshub.com/requests';
 
 /**
+ * Translations loading.
+ */
+function trh_load_textdomain() {
+	load_plugin_textdomain(TRHBR_PLUGIN_NAME, false, dirname(plugin_basename( __FILE__ )).'/languages'); 
+}
+
+add_action('init', 'trh_load_textdomain');
+
+/**
  * Settings.
  */
 function trh_settings_init()
@@ -29,14 +38,14 @@ function trh_settings_init()
 
    add_settings_section(
       'trh_section_req_form_settings',
-      __('TheRentalsHub Booking Request Form Options', 'trh'),
+      __('TheRentalsHub Booking Request Form Options', 'therentalshub-request'),
       'trh_section_req_form_settings_callback',
       'trh'
    );
 
    add_settings_field(
 		'trh_min_booking_period',
-      __('Minimum booking period (days)', 'trh'),
+      __('Minimum booking period (days)', 'therentalshub-request'),
 		'trh_min_booking_period_cb',
 		'trh',
 		'trh_section_req_form_settings',
@@ -48,7 +57,7 @@ function trh_settings_init()
 
    add_settings_field(
 		'trh_default_time',
-      __('Default cut-off time', 'trh'),
+      __('Default cut-off time', 'therentalshub-request'),
 		'trh_default_time_cb',
 		'trh',
 		'trh_section_req_form_settings',
@@ -60,7 +69,7 @@ function trh_settings_init()
 
    add_settings_field(
 		'trh_show_cars',
-      __('Show cars selector', 'trh'),
+      __('Show cars selector', 'therentalshub-request'),
 		'trh_show_cars_cb',
 		'trh',
 		'trh_section_req_form_settings',
@@ -72,7 +81,7 @@ function trh_settings_init()
 
    add_settings_field(
 		'trh_show_locations',
-      __('Show locations selector', 'trh'),
+      __('Show locations selector', 'therentalshub-request'),
 		'trh_show_locations_cb',
 		'trh',
 		'trh_section_req_form_settings',
@@ -84,7 +93,7 @@ function trh_settings_init()
 
    add_settings_field(
 		'trh_show_flight_nr',
-      __('Show flight number field', 'trh'),
+      __('Show flight number field', 'therentalshub-request'),
 		'trh_show_flight_nr_cb',
 		'trh',
 		'trh_section_req_form_settings',
@@ -96,7 +105,7 @@ function trh_settings_init()
 
    add_settings_field(
 		'trh_send_email',
-      __('Send confirmation email', 'trh'),
+      __('Send confirmation email', 'therentalshub-request'),
 		'trh_send_email_cb',
 		'trh',
 		'trh_section_req_form_settings',
@@ -108,7 +117,7 @@ function trh_settings_init()
 
    add_settings_field(
 		'trh_notify_email',
-      __('Send confirmation email to', 'trh'),
+      __('Send confirmation email to', 'therentalshub-request'),
 		'trh_notify_email_cb',
 		'trh',
 		'trh_section_req_form_settings',
@@ -120,7 +129,7 @@ function trh_settings_init()
 
    add_settings_field(
 		'trh_api_key',
-      __('API key', 'trh'),
+      __('API key', 'therentalshub-request'),
 		'trh_api_key_cb',
 		'trh',
 		'trh_section_req_form_settings',
@@ -135,7 +144,7 @@ add_action('admin_init', 'trh_settings_init');
 
 function trh_section_req_form_settings_callback($args)
 {
-   echo '<p id="'.esc_attr($args['id']).'">'.esc_html_e('Setup request form options and connection to your fleet management account.', 'trh').'</p>';
+   echo '<p id="'.esc_attr($args['id']).'">'.__('Setup request form options and connection to your fleet management account.', 'therentalshub-request').'</p>';
 }
 
 function trh_default_time_cb($args)
@@ -147,7 +156,7 @@ function trh_default_time_cb($args)
 			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]" 
          value="<?=(isset($options[$args['label_for']]) ? $options[$args['label_for']] : '');?>" placeholder="11:00" style="width:100px"/>
 	<p class="description">
-		<?php esc_html_e('Default pick-up &amp; drop-off time. Use 1 hour and 30 minutes increments only.', 'trh' ); ?>
+		<?=__('Default pick-up &amp; drop-off time. Use 1 hour and 30 minutes increments only.', 'therentalshub-request' );?>
 	</p>
 	<?php
 }
@@ -161,7 +170,7 @@ function trh_min_booking_period_cb($args)
 			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]" 
          value="<?=(isset($options[$args['label_for']]) ? $options[$args['label_for']] : '');?>" placeholder="3" style="width:100px"/>
 	<p class="description">
-		<?php esc_html_e('Minimum booking period in days.', 'trh' ); ?>
+		<?=__('Minimum booking period in days.', 'therentalshub-request' );?>
 	</p>
 	<?php
 }
@@ -174,14 +183,14 @@ function trh_show_cars_cb($args)
 			id="<?php echo esc_attr( $args['label_for'] ); ?>" 
 			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]">
 		<option value="yes" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'yes', false ) ) : ( '' ); ?>>
-			<?php esc_html_e('Yes', 'trh'); ?>
+			<?=__('Yes', 'therentalshub-request');?>
 		</option>
  		<option value="no" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'no', false ) ) : ( '' ); ?>>
-			<?php esc_html_e('No', 'trh'); ?>
+			<?=__('No', 'therentalshub-request');?>
 		</option>
 	</select>
 	<p class="description">
-		<?php esc_html_e('Displays a list with cars from your fleet management account for selection.', 'trh'); ?>
+		<?=__('Displays a list with cars from your fleet management account for selection.', 'therentalshub-request');?>
 	</p>
 	<?php
 }
@@ -194,14 +203,14 @@ function trh_show_locations_cb($args)
 			id="<?php echo esc_attr( $args['label_for'] ); ?>" 
 			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]">
 		<option value="yes" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'yes', false ) ) : ( '' ); ?>>
-			<?php esc_html_e('Yes', 'trh'); ?>
+			<?=__('Yes', 'therentalshub-request');?>
 		</option>
  		<option value="no" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'no', false ) ) : ( '' ); ?>>
-			<?php esc_html_e('No', 'trh'); ?>
+			<?=__('No', 'therentalshub-request');?>
 		</option>
 	</select>
 	<p class="description">
-		<?php esc_html_e('Displays a list with pick-up locations from your fleet management account for selection.', 'trh'); ?>
+		<?=__('Displays a list with pick-up locations from your fleet management account for selection.', 'therentalshub-request');?>
 	</p>
 	<?php
 }
@@ -214,14 +223,14 @@ function trh_show_flight_nr_cb($args)
 			id="<?php echo esc_attr( $args['label_for'] ); ?>" 
 			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]">
 		<option value="yes" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'yes', false ) ) : ( '' ); ?>>
-			<?php esc_html_e('Yes', 'trh'); ?>
+			<?=__('Yes', 'therentalshub-request');?>
 		</option>
  		<option value="no" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'no', false ) ) : ( '' ); ?>>
-			<?php esc_html_e('No', 'trh'); ?>
+			<?=__('No', 'therentalshub-request');?>
 		</option>
 	</select>
 	<p class="description">
-		<?php esc_html_e('Displays a field to capture customer\'s filght number.', 'trh'); ?>
+		<?=__('Displays a field to capture customer\'s filght number.', 'therentalshub-request');?>
 	</p>
 	<?php
 }
@@ -234,14 +243,14 @@ function trh_send_email_cb($args)
 			id="<?php echo esc_attr( $args['label_for'] ); ?>" 
 			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]">
 		<option value="yes" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'yes', false ) ) : ( '' ); ?>>
-			<?php esc_html_e('Yes', 'trh'); ?>
+			<?=__('Yes', 'therentalshub-request');?>
 		</option>
  		<option value="no" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'no', false ) ) : ( '' ); ?>>
-			<?php esc_html_e('No', 'trh'); ?>
+			<?=__('No', 'therentalshub-request');?>
 		</option>
 	</select>
 	<p class="description">
-		<?php esc_html_e('Send a confirmation email with the request details.', 'trh'); ?>
+		<?=__('Send a confirmation email with the request details.', 'therentalshub-request');?>
 	</p>
 	<?php
 }
@@ -255,7 +264,7 @@ function trh_notify_email_cb($args)
 			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]" 
          value="<?=(isset($options[$args['label_for']]) ? $options[$args['label_for']] : '');?>" style="width:350px"/>
 	<p class="description">
-		<?php esc_html_e('You will be notified to this email when a requests is submitted.', 'trh' ); ?>
+		<?=__('You will be notified to this email when a requests is submitted.', 'therentalshub-request' );?>
 	</p>
 	<?php
 }
@@ -269,7 +278,7 @@ function trh_api_key_cb($args)
 			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]" 
          value="<?=(isset($options[$args['label_for']]) ? $options[$args['label_for']] : '');?>" style="width:350px"/>
 	<p class="description">
-		<?php esc_html_e('Your fleet management account API key.', 'trh' ); ?>
+		<?=__('Your fleet management account API key.', 'therentalshub-request' );?>
 	</p>
 	<?php
 }
@@ -294,7 +303,7 @@ function trh_options_page_html()
 	}
 
    if (isset($_GET['settings-updated'])) {
-		add_settings_error('trh_messages', 'trh_message', __('Settings Saved', 'trh'), 'updated');
+		add_settings_error('trh_messages', 'trh_message', __('Settings Saved', 'therentalshub-request'), 'updated');
 	}
 
    settings_errors('trh_messages');
@@ -404,7 +413,7 @@ add_shortcode('trh_request_form', 'trh_request_form_shortcode');
 function ajax_therentalshub_get_cars()
 {
    // generic error
-   $error = __('Request form is currently not available', 'trh');
+   $error = __('Request form is currently not available', 'therentalshub-request');
 
    header('Content-Type: application/json', true);
 

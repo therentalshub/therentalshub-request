@@ -223,14 +223,15 @@ var trhRequestForm = (function($, flatpickr) {
         // all needed vars filled?
         if (startDateEl.val() === '' || startTimeEl.val() === '' || endDateEl.val() === '' 
             || endTimeEl.val() === '' || fnameEl.val() === '' || lnameEl.val() === '' || emailEl.val() === '') {
-            alert('Please fill all required (with the asterisk) fields.');
+
+            alert(trhApp.lang.warn_fill_fields);
             return;
         }
 
         var btn = form.find(':submit');
         var btnHtml = btn.html();
 
-        btn.html('Please wait...');
+        btn.html(trhApp.lang.please_wait + '...');
 
         $('#trh-request-failed-alert').css('display', 'none');
         $('#trh-request-success-alert').css('display', 'none');

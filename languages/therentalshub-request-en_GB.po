@@ -1,0 +1,268 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en_GB\n"
+
+#: email-template-admin.php:2
+msgid "New booking request."
+msgstr "New booking request."
+
+#: email-template-admin.php:6 email-template.php:7
+msgid "Pick-up date/time"
+msgstr "Pick-up date/time"
+
+#: email-template-admin.php:10 email-template.php:11
+msgid "Drop-off date/time"
+msgstr "Drop-off date/time"
+
+#: email-template-admin.php:15 email-template.php:16
+msgid "Selected car"
+msgstr "Selected car"
+
+#: email-template-admin.php:21 email-template.php:22
+msgid "Pick-up location"
+msgstr "Pick-up location"
+
+#: email-template-admin.php:27 email-template.php:28
+msgid "Flight nr."
+msgstr "Flight nr."
+
+#: email-template-admin.php:32 email-template.php:33
+msgid "Customer"
+msgstr "Customer"
+
+#: email-template-admin.php:36 email-template.php:37
+msgid "Email"
+msgstr "Email"
+
+#: email-template-admin.php:40 email-template.php:41
+msgid "Phone"
+msgstr "Phone"
+
+#: email-template-admin.php:44 email-template.php:45
+msgid "Notes"
+msgstr "Notes"
+
+#: email-template.php:2
+#, php-format
+msgid ""
+"Dear %s, <br>thank you for your enquiry. We will check our availability and "
+"contact you as soon as possible with booking details."
+msgstr ""
+"Dear %s, <br>thank you for your enquiry. We will check our availability and "
+"contact you as soon as possible with booking details."
+
+#: email-template.php:3
+msgid "Following are your request details."
+msgstr "Following are your request details."
+
+#: request-form.php:9
+msgid "Pick-up date"
+msgstr "Pick-up date"
+
+#: request-form.php:10 request-form.php:21
+msgid "Select date"
+msgstr "Select date"
+
+#: request-form.php:13
+msgid "Pick-up time"
+msgstr "Pick-up time"
+
+#: request-form.php:14 request-form.php:25
+msgid "Select time"
+msgstr "Select time"
+
+#: request-form.php:20
+msgid "Drop-off date"
+msgstr "Drop-off date"
+
+#: request-form.php:24
+msgid "Drop-off time"
+msgstr "Drop-off time"
+
+#: request-form.php:31
+msgid "Choose vehicle"
+msgstr "Choose vehicle"
+
+#: request-form.php:40
+msgid "Choose pick-up location"
+msgstr "Choose pick-up location"
+
+#: request-form.php:49
+msgid "Flight number"
+msgstr "Flight number"
+
+#: request-form.php:56
+msgid "First name"
+msgstr "First name"
+
+#: request-form.php:63
+msgid "Last name"
+msgstr "Last name"
+
+#: request-form.php:70
+msgid "Email address"
+msgstr "Email address"
+
+#: request-form.php:77
+msgid "Phone number"
+msgstr "Phone number"
+
+#: request-form.php:84
+msgid "Additional notes"
+msgstr "Additional notes"
+
+#: request-form.php:98
+msgid ""
+"Thank you! Your request has been submitted. We will contact you shortly with "
+"availability. Please check your inbox for our confirmation email."
+msgstr ""
+"Thank you! Your request has been submitted. We will contact you shortly with "
+"availability. Please check your inbox for our confirmation email."
+
+#: request-form.php:107
+msgid "Submit booking request"
+msgstr "Submit booking request"
+
+#: request-form.php:120
+msgid "Please fill all required (with the asterisk) fields."
+msgstr "Please fill all required (with the asterisk) fields."
+
+#: request-form.php:121
+msgid "Please wait"
+msgstr "Please wait"
+
+#: therentalshub-request.php:32
+msgid "TheRentalsHub Booking Request Form Options"
+msgstr "TheRentalsHub Booking Request Form Options"
+
+#: therentalshub-request.php:39
+msgid "Minimum booking period (days)"
+msgstr "Minimum booking period (days)"
+
+#: therentalshub-request.php:51
+msgid "Default cut-off time"
+msgstr "Default cut-off time"
+
+#: therentalshub-request.php:63
+msgid "Show cars selector"
+msgstr "Show cars selector"
+
+#: therentalshub-request.php:75
+msgid "Show locations selector"
+msgstr "Show locations selector"
+
+#: therentalshub-request.php:87
+msgid "Show flight number field"
+msgstr "Show flight number field"
+
+#: therentalshub-request.php:99
+msgid "Send confirmation email"
+msgstr "Send confirmation email"
+
+#: therentalshub-request.php:111
+msgid "Send confirmation email to"
+msgstr "Send confirmation email to"
+
+#: therentalshub-request.php:123
+msgid "API key"
+msgstr "API key"
+
+#: therentalshub-request.php:138
+msgid ""
+"Setup request form options and connection to your fleet management account."
+msgstr ""
+"Setup request form options and connection to your fleet management account."
+
+#: therentalshub-request.php:150
+msgid ""
+"Default pick-up &amp; drop-off time. Use 1 hour and 30 minutes increments "
+"only."
+msgstr ""
+"Default pick-up &amp; drop-off time. Use 1 hour and 30 minutes increments "
+"only."
+
+#: therentalshub-request.php:164
+msgid "Minimum booking period in days."
+msgstr "Minimum booking period in days."
+
+#: therentalshub-request.php:177 therentalshub-request.php:197
+#: therentalshub-request.php:217 therentalshub-request.php:237
+msgid "Yes"
+msgstr "Yes"
+
+#: therentalshub-request.php:180 therentalshub-request.php:200
+#: therentalshub-request.php:220 therentalshub-request.php:240
+msgid "No"
+msgstr "No"
+
+#: therentalshub-request.php:184
+msgid ""
+"Displays a list with cars from your fleet management account for selection."
+msgstr ""
+"Displays a list with cars from your fleet management account for selection."
+
+#: therentalshub-request.php:204
+msgid ""
+"Displays a list with pick-up locations from your fleet management account "
+"for selection."
+msgstr ""
+"Displays a list with pick-up locations from your fleet management account "
+"for selection."
+
+#: therentalshub-request.php:224
+msgid "Displays a field to capture customer's filght number."
+msgstr "Displays a field to capture customer's filght number."
+
+#: therentalshub-request.php:244
+msgid "Send a confirmation email with the request details."
+msgstr "Send a confirmation email with the request details."
+
+#: therentalshub-request.php:258
+msgid "You will be notified to this email when a requests is submitted."
+msgstr "You will be notified to this email when a requests is submitted."
+
+#: therentalshub-request.php:272
+msgid "Your fleet management account API key."
+msgstr "Your fleet management account API key."
+
+#: therentalshub-request.php:297
+msgid "Settings Saved"
+msgstr "Settings Saved"
+
+#: therentalshub-request.php:407 therentalshub-request.php:449
+msgid "Request form is currently not available"
+msgstr "Request form is currently not available"
+
+#: therentalshub-request.php:491
+msgid "Request registration is currently not available"
+msgstr "Request registration is currently not available"
+
+#: therentalshub-request.php:537
+msgid "Missing vars, cannot continue"
+msgstr "Missing vars, cannot continue"
+
+#: therentalshub-request.php:543
+msgid "Invalid email address provided."
+msgstr "Invalid email address provided."
+
+#: therentalshub-request.php:568
+msgid "An error occured, please try again."
+msgstr "An error occured, please try again."
+
+#: therentalshub-request.php:574
+msgid "Your booking request confirmation"
+msgstr "Your booking request confirmation"
+
+#: therentalshub-request.php:584
+msgid "New booking request"
+msgstr "New booking request"
