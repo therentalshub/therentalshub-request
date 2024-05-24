@@ -142,6 +142,10 @@ msgstr ""
 msgid "Show cars selector"
 msgstr ""
 
+#: therentalshub-request.php:84
+msgid "Show cars by group"
+msgstr ""
+
 #: therentalshub-request.php:75
 msgid "Show locations selector"
 msgstr ""
@@ -190,6 +194,11 @@ msgstr ""
 #: therentalshub-request.php:184
 msgid ""
 "Displays a list with cars from your fleet management account for selection."
+msgstr ""
+
+#: therentalshub-request.php:225
+msgid ""
+"Groups cars in the list by category or displays them as a list."
 msgstr ""
 
 #: therentalshub-request.php:204

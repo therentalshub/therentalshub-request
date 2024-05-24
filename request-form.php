@@ -114,6 +114,7 @@
                 minDays: <?=$trhMinDays;?>,
                 defaultTime: "<?=$trhDefaultTime;?>",
                 showCars: <?=$trhShowCars;?>,
+                carsByGroup: <?=$trhCarsByGroup;?>,
                 showLocations: <?=$trhShowLocations;?>,
                 showFlightNr: <?=$trhShowFlightNr;?>,
                 lang: {

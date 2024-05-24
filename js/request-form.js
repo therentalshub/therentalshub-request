@@ -161,12 +161,35 @@ var trhRequestForm = (function($, flatpickr) {
                 return;
             }
 
-            for (i = 0; i < data.length; i++) {
+            // show list or optgroup
+            if (trhApp.carsByGroup) {
+                //
+                let optgroup = '';
+
+                for (i = 0; i < data.length; i++) {
+
+                    optgroup = `<optgroup label="Group: ${data[i].group_name}">`;
+
+                    for (j = 0; j < data[i].cars.length; j++) {
+
+                        optgroup += `<option value="${data[i].cars[j].id}">${data[i].cars[j].name}</option>`;
+                    }
+
+                    optgroup += `</optgroup>`;
+
+                    carEl.append(optgroup);
+                }
+
+
+            } else {
                 
-                carEl.append($('<option>', {
-                    value: data[i].id,
-                    text: data[i].brand + ' ' + data[i].model + ' - ' + data[i].gear
-                }));
+                for (i = 0; i < data.length; i++) {
+                
+                    carEl.append($('<option>', {
+                        value: data[i].id,
+                        text: data[i].brand + ' ' + data[i].model + ' - ' + data[i].gear
+                    }));
+                }
             }
         });
     };

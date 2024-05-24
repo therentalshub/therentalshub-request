@@ -10,35 +10,35 @@ msgstr ""
 "X-Generator: Poedit 2.4.1\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: el_GR\n"
+"Language: en_GB\n"
 
 #: email-template-admin.php:2
 msgid "New booking request."
-msgstr "Νέο αίτημα κράτησης."
+msgstr "New booking request."
 
 #: email-template-admin.php:6 email-template.php:7
 msgid "Pick-up date/time"
-msgstr "Ημερομηνία/ώρα παραλαβής"
+msgstr "Pick-up date/time"
 
 #: email-template-admin.php:10 email-template.php:11
 msgid "Drop-off date/time"
-msgstr "Ημερομηνία/ώρα παράδοσης"
+msgstr "Drop-off date/time"
 
 #: email-template-admin.php:15 email-template.php:16
 msgid "Selected car"
-msgstr "Επιλεγμένο αυτοκίνητο"
+msgstr "Selected car"
 
 #: email-template-admin.php:21 email-template.php:22
 msgid "Pick-up location"
-msgstr "Τοποθεσία παραλαβής"
+msgstr "Pick-up location"
 
 #: email-template-admin.php:27 email-template.php:28
 msgid "Flight nr."
-msgstr "Αριθμός πτήσης."
+msgstr "Flight nr."
 
 #: email-template-admin.php:32 email-template.php:33
 msgid "Customer"
-msgstr "Πελάτης"
+msgstr "Customer"
 
 #: email-template-admin.php:36 email-template.php:37
 msgid "Email"
@@ -46,11 +46,11 @@ msgstr "Email"
 
 #: email-template-admin.php:40 email-template.php:41
 msgid "Phone"
-msgstr "Τηλέφωνο"
+msgstr "Phone"
 
 #: email-template-admin.php:44 email-template.php:45
 msgid "Notes"
-msgstr "Σημειώσεις"
+msgstr "Notes"
 
 #: email-template.php:2
 #, php-format
@@ -58,215 +58,220 @@ msgid ""
 "Dear %s, <br>thank you for your enquiry. We will check our availability and "
 "contact you as soon as possible with booking details."
 msgstr ""
-"Αγαπητέ %s, <br>ευχαριστούμε για το αίτημά σας. Θα ελέγξουμε τη "
-"διαθεσιμότητά μας και θα επικοινωνήσουμε μαζί σας το συντομότερο δυνατό με "
-"λεπτομέρειες για την κράτηση."
+"Dear %s, <br>thank you for your enquiry. We will check our availability and "
+"contact you as soon as possible with booking details."
 
 #: email-template.php:3
 msgid "Following are your request details."
-msgstr "Ακολουθούν τα στοιχεία του αιτήματός σας."
+msgstr "Following are your request details."
 
 #: request-form.php:9
 msgid "Pick-up date"
-msgstr "Ημερομηνία παραλαβής"
+msgstr "Pick-up date"
 
 #: request-form.php:10 request-form.php:21
 msgid "Select date"
-msgstr "Επιλέξτε ημερομηνία"
+msgstr "Select date"
 
 #: request-form.php:13
 msgid "Pick-up time"
-msgstr "Ωρα παραλαβής"
+msgstr "Pick-up time"
 
 #: request-form.php:14 request-form.php:25
 msgid "Select time"
-msgstr "Επιλέξτε ώρα"
+msgstr "Select time"
 
 #: request-form.php:20
 msgid "Drop-off date"
-msgstr "Ημερομηνία παράδοσης"
+msgstr "Drop-off date"
 
 #: request-form.php:24
 msgid "Drop-off time"
-msgstr "Ώρα παράδοσης"
+msgstr "Drop-off time"
 
 #: request-form.php:31
 msgid "Choose vehicle"
-msgstr "Επιλέξτε όχημα"
+msgstr "Choose vehicle"
 
 #: request-form.php:40
 msgid "Choose pick-up location"
-msgstr "Επιλέξτε τοποθεσία παραλαβής"
+msgstr "Choose pick-up location"
 
 #: request-form.php:49
 msgid "Flight number"
-msgstr "Αριθμός πτήσης"
+msgstr "Flight number"
 
 #: request-form.php:56
 msgid "First name"
-msgstr "Όνομα"
+msgstr "First name"
 
 #: request-form.php:63
 msgid "Last name"
-msgstr "Επίθετο"
+msgstr "Last name"
 
 #: request-form.php:70
 msgid "Email address"
-msgstr "Email"
+msgstr "Email address"
 
 #: request-form.php:77
 msgid "Phone number"
-msgstr "Αριθμός τηλεφώνου"
+msgstr "Phone number"
 
 #: request-form.php:84
 msgid "Additional notes"
-msgstr "Επιπρόσθετες σημειώσεις"
+msgstr "Additional notes"
 
 #: request-form.php:98
 msgid ""
 "Thank you! Your request has been submitted. We will contact you shortly with "
 "availability. Please check your inbox for our confirmation email."
 msgstr ""
-"Σας ευχαριστούμε! Το αίτημά σας έχει υποβληθεί. Σύντομα θα επικοινωνήσουμε "
-"μαζί σας με διαθεσιμότητα. Ελέγξτε τα εισερχόμενά σας για το email "
-"επιβεβαίωσης."
+"Thank you! Your request has been submitted. We will contact you shortly with "
+"availability. Please check your inbox for our confirmation email."
 
 #: request-form.php:107
 msgid "Submit booking request"
-msgstr "Υποβολή αιτήματος κράτησης"
+msgstr "Submit booking request"
 
 #: request-form.php:120
 msgid "Please fill all required (with the asterisk) fields."
-msgstr "Συμπληρώστε όλα τα απαραίτητα (με τον αστερίσκο) πεδία."
+msgstr "Please fill all required (with the asterisk) fields."
 
 #: request-form.php:121
 msgid "Please wait"
-msgstr "Παρακαλώ περιμένετε"
+msgstr "Please wait"
 
 #: therentalshub-request.php:32
 msgid "TheRentalsHub Booking Request Form Options"
-msgstr "Επιλογές φόρμας αιτήματος κράτησης TheRentalsHub"
+msgstr "TheRentalsHub Booking Request Form Options"
 
 #: therentalshub-request.php:39
 msgid "Minimum booking period (days)"
-msgstr "Ελάχιστη περίοδος κράτησης (ημέρες)"
+msgstr "Minimum booking period (days)"
 
 #: therentalshub-request.php:51
 msgid "Default cut-off time"
-msgstr "Προεπιλεγμένος χρόνος αποκοπής"
+msgstr "Default cut-off time"
 
 #: therentalshub-request.php:63
 msgid "Show cars selector"
-msgstr "Εμφάνιση επιλογέα αυτοκινήτων"
+msgstr "Show cars selector"
+
+#: therentalshub-request.php:84
+msgid "Show cars by group"
+msgstr "Show cars by group"
 
 #: therentalshub-request.php:75
 msgid "Show locations selector"
-msgstr "Εμφάνιση επιλογέα τοποθεσιών"
+msgstr "Show locations selector"
 
 #: therentalshub-request.php:87
 msgid "Show flight number field"
-msgstr "Εμφάνιση πεδίου αριθμού πτήσης"
+msgstr "Show flight number field"
 
 #: therentalshub-request.php:99
 msgid "Send confirmation email"
-msgstr "Αποστολή email επιβεβαίωσης"
+msgstr "Send confirmation email"
 
 #: therentalshub-request.php:111
 msgid "Send confirmation email to"
-msgstr "Αποστολή email επιβεβαίωσης στο"
+msgstr "Send confirmation email to"
 
 #: therentalshub-request.php:123
 msgid "API key"
-msgstr "Κλειδί API"
+msgstr "API key"
 
 #: therentalshub-request.php:138
 msgid ""
 "Setup request form options and connection to your fleet management account."
 msgstr ""
-"Ρύθμιση επιλογών φόρμας αιτήματος και σύνδεση με τον λογαριασμό διαχείρισης "
-"στόλου σας."
+"Setup request form options and connection to your fleet management account."
 
 #: therentalshub-request.php:150
 msgid ""
 "Default pick-up &amp; drop-off time. Use 1 hour and 30 minutes increments "
 "only."
 msgstr ""
-"Προεπιλεγμένος χρόνος παραλαβής &amp; παράδοσης. Χρησιμοποιήστε μόνο "
-"προσαυξήσεις 1 ώρας και 30 λεπτών."
+"Default pick-up &amp; drop-off time. Use 1 hour and 30 minutes increments "
+"only."
 
 #: therentalshub-request.php:164
 msgid "Minimum booking period in days."
-msgstr "Ελάχιστη περίοδος κράτησης σε ημέρες."
+msgstr "Minimum booking period in days."
 
 #: therentalshub-request.php:177 therentalshub-request.php:197
 #: therentalshub-request.php:217 therentalshub-request.php:237
 msgid "Yes"
-msgstr "Ναι"
+msgstr "Yes"
 
 #: therentalshub-request.php:180 therentalshub-request.php:200
 #: therentalshub-request.php:220 therentalshub-request.php:240
 msgid "No"
-msgstr "Όχι"
+msgstr "No"
 
 #: therentalshub-request.php:184
 msgid ""
 "Displays a list with cars from your fleet management account for selection."
 msgstr ""
-"Εμφανίζει μια λίστα με αυτοκίνητα από τον λογαριασμό διαχείρισης στόλου σας "
-"για επιλογή."
+"Displays a list with cars from your fleet management account for selection."
+
+#: therentalshub-request.php:225
+msgid ""
+"Groups cars in the list by category or displays them as a list."
+msgstr "Groups cars in the list by category or displays them as a list."
 
 #: therentalshub-request.php:204
 msgid ""
 "Displays a list with pick-up locations from your fleet management account "
 "for selection."
 msgstr ""
-"Εμφανίζει μια λίστα με τοποθεσίες παραλαβής από τον λογαριασμό διαχείρισης "
-"στόλου σας για επιλογή."
+"Displays a list with pick-up locations from your fleet management account "
+"for selection."
 
 #: therentalshub-request.php:224
 msgid "Displays a field to capture customer's filght number."
-msgstr "Εμφανίζει ένα πεδίο για την καταγραφή του αριθμού πτήσης του πελάτη."
+msgstr "Displays a field to capture customer's filght number."
 
 #: therentalshub-request.php:244
 msgid "Send a confirmation email with the request details."
-msgstr "Στείλτε ένα email επιβεβαίωσης με τα στοιχεία του αιτήματος."
+msgstr "Send a confirmation email with the request details."
 
 #: therentalshub-request.php:258
 msgid "You will be notified to this email when a requests is submitted."
-msgstr "Θα ειδοποιηθείτε σε αυτό το email όταν υποβάλλονται αιτήματα."
+msgstr "You will be notified to this email when a requests is submitted."
 
 #: therentalshub-request.php:272
 msgid "Your fleet management account API key."
-msgstr "Κλειδί API του λογαριασμού διαχείρισης στόλου σας."
+msgstr "Your fleet management account API key."
 
 #: therentalshub-request.php:297
 msgid "Settings Saved"
-msgstr "Οι ρυθμίσεις αποθηκεύτηκαν"
+msgstr "Settings Saved"
 
 #: therentalshub-request.php:407 therentalshub-request.php:449
 msgid "Request form is currently not available"
-msgstr "Η φόρμα αιτήματος δεν είναι διαθέσιμη αυτήν τη στιγμή"
+msgstr "Request form is currently not available"
 
 #: therentalshub-request.php:491
 msgid "Request registration is currently not available"
-msgstr "Η αίτηση εγγραφής δεν είναι διαθέσιμη αυτήν τη στιγμή"
+msgstr "Request registration is currently not available"
 
 #: therentalshub-request.php:537
 msgid "Missing vars, cannot continue"
-msgstr "Λείπουν στοιχεία, δεν είναι δυνατή η συνέχεια"
+msgstr "Missing vars, cannot continue"
 
 #: therentalshub-request.php:543
 msgid "Invalid email address provided."
-msgstr "Δόθηκε μη έγκυρη διεύθυνση email."
+msgstr "Invalid email address provided."
 
 #: therentalshub-request.php:568
 msgid "An error occured, please try again."
-msgstr "Παρουσιάστηκε σφάλμα, δοκιμάστε ξανά."
+msgstr "An error occured, please try again."
 
 #: therentalshub-request.php:574
 msgid "Your booking request confirmation"
-msgstr "Επιβεβαίωση του αιτήματος κράτησής σας"
+msgstr "Your booking request confirmation"
 
 #: therentalshub-request.php:584
 msgid "New booking request"
-msgstr "Νέο αίτημα κράτησης"
+msgstr "New booking request"

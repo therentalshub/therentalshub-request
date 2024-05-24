@@ -3,7 +3,7 @@
  * Plugin Name: TheRentalsHub Request
  * Plugin URI: https://www.therentalshub.com
  * Description: Capture booking requests
- * Version: 1.0.9
+ * Version: 1.1.0
  * Requires PHP: 8.0
  * Author: The Rentals Hub
  * License: MIT
@@ -75,6 +75,18 @@ function trh_settings_init()
 		'trh_section_req_form_settings',
 		[
          'label_for' => 'trh_show_cars',
+			'class' => 'trh_row'
+      ]
+	);
+
+   add_settings_field(
+		'trh_show_cars_grouped',
+      __('Show cars by group', 'therentalshub-request'),
+		'trh_show_cars_grouped_cb',
+		'trh',
+		'trh_section_req_form_settings',
+		[
+         'label_for' => 'trh_show_cars_grouped',
 			'class' => 'trh_row'
       ]
 	);
@@ -191,6 +203,26 @@ function trh_show_cars_cb($args)
 	</select>
 	<p class="description">
 		<?=__('Displays a list with cars from your fleet management account for selection.', 'therentalshub-request');?>
+	</p>
+	<?php
+}
+
+function trh_show_cars_grouped_cb($args)
+{
+	$options = get_option('trh_options');
+   ?>
+	<select
+			id="<?php echo esc_attr( $args['label_for'] ); ?>" 
+			name="trh_options[<?php echo esc_attr( $args['label_for'] ); ?>]">
+		<option value="yes" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'yes', false ) ) : ( '' ); ?>>
+			<?=__('Yes', 'therentalshub-request');?>
+		</option>
+ 		<option value="no" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'no', false ) ) : ( '' ); ?>>
+			<?=__('No', 'therentalshub-request');?>
+		</option>
+	</select>
+	<p class="description">
+		<?=__('Groups cars in the list by category or displays them as a list.', 'therentalshub-request');?>
 	</p>
 	<?php
 }
@@ -339,7 +371,7 @@ function trh_register_plugin_scripts()
    $requestJs = 'request-form';
 
    if (TRHBR_ENVIRONMENT != 'dev') {
-      $requestJs = 'request-form-d7Yewk3a';
+      $requestJs = 'request-form-e4Rmd1Kd';
    }
 
    wp_enqueue_script('therentalshub-request', plugins_url(TRHBR_PLUGIN_NAME.'/js/'.$requestJs.'.js'), ['jquery', 'flatpickr'], false, ['strategy' => 'defer', 'in_footer' => true]);
@@ -371,6 +403,8 @@ function trh_request_form_shortcode()
 
    $trhShowCars = 'false';
 
+   $trhCarsByGroup = 'true';
+
    $trhShowLocations = 'false';
 
    $trhShowFlightNr = 'false';
@@ -387,6 +421,10 @@ function trh_request_form_shortcode()
 
    if (isset($options['trh_show_cars'])) {
       $trhShowCars = $options['trh_show_cars'] == 'yes' ? 'true' : 'false';
+   }
+
+   if (isset($options['trh_show_cars_grouped'])) {
+      $trhCarsByGroup = $options['trh_show_cars_grouped'] == 'yes' ? 'true' : 'false';
    }
 
    if (isset($options['trh_show_locations'])) {
@@ -417,9 +455,19 @@ function ajax_therentalshub_get_cars()
 
    header('Content-Type: application/json', true);
 
-   // get api key
+   // get options
    $options = get_option('trh_options');
+
+   // api key
    $apiKey = $options['trh_api_key'];
+
+   // cars by group or list
+   $byGroup = true;
+
+   if (isset($options['trh_show_cars_grouped'])) {
+      $byGroup = $options['trh_show_cars_grouped'] == 'yes' ? true : false;
+   }
+
    $options = null;
 
    if (check_ajax_referer(TRHBR_NONCE_CONTEXT) === false) {
@@ -429,8 +477,11 @@ function ajax_therentalshub_get_cars()
       wp_die();
    }
 
+   // method to call
+   $path = '/cars'.($byGroup ? '/group' : '');
+
    // request cars
-   $response = wp_remote_get((TRHBR_ENVIRONMENT == 'dev' ? TRHBR_API_ENDPOINT_DEV : TRHBR_API_ENDPOINT_PROD).'/cars', [
+   $response = wp_remote_get((TRHBR_ENVIRONMENT == 'dev' ? TRHBR_API_ENDPOINT_DEV : TRHBR_API_ENDPOINT_PROD).$path, [
       'headers' => [
          'Content-Type' => 'application/json',
          'X-Api-Key' => $apiKey,
