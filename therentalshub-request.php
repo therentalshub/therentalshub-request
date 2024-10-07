@@ -17,7 +17,7 @@
 const TRHBR_ENVIRONMENT = 'prod';
 const TRHBR_PLUGIN_NAME = 'therentalshub-request';
 const TRHBR_NONCE_CONTEXT = 'XVGBkdV8tL';
-const TRHBR_API_ENDPOINT_DEV = 'https://web-api.vpn.therentalshub.com/requests';
+const TRHBR_API_ENDPOINT_DEV = 'http://web-api.vpn.therentalshub.com/requests';
 const TRHBR_API_ENDPOINT_PROD = 'https://web-api.therentalshub.com/requests';
 
 /**
@@ -617,7 +617,7 @@ function processRequest($vars)
    $response = wp_remote_post((TRHBR_ENVIRONMENT == 'dev' ? TRHBR_API_ENDPOINT_DEV : TRHBR_API_ENDPOINT_PROD), [
       'headers' => [
          'Content-Type' => 'application/json',
-         'X-Api-Key' => $apiKey
+         'X-Tenant-Key' => $apiKey
       ],
       'body' => $json
    ]);
