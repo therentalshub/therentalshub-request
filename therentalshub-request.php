@@ -17,7 +17,7 @@
 const TRHBR_ENVIRONMENT = 'prod';
 const TRHBR_PLUGIN_NAME = 'therentalshub-request';
 const TRHBR_NONCE_CONTEXT = 'XVGBkdV8tL';
-const TRHBR_API_ENDPOINT_DEV = 'http://fleet-haproxy-public:9015/requests';
+const TRHBR_API_ENDPOINT_DEV = 'https://web-api.vpn.therentalshub.com/requests';
 const TRHBR_API_ENDPOINT_PROD = 'https://web-api.therentalshub.com/requests';
 
 /**
