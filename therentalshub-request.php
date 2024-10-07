@@ -484,7 +484,7 @@ function ajax_therentalshub_get_cars()
    $response = wp_remote_get((TRHBR_ENVIRONMENT == 'dev' ? TRHBR_API_ENDPOINT_DEV : TRHBR_API_ENDPOINT_PROD).$path, [
       'headers' => [
          'Content-Type' => 'application/json',
-         'X-Api-Key' => $apiKey,
+         'X-Tenant-Key' => $apiKey,
       ]
    ]);
 
@@ -526,7 +526,7 @@ function ajax_therentalshub_get_locations()
    $response = wp_remote_get((TRHBR_ENVIRONMENT == 'dev' ? TRHBR_API_ENDPOINT_DEV : TRHBR_API_ENDPOINT_PROD).'/locations', [
       'headers' => [
          'Content-Type' => 'application/json',
-         'X-Api-Key' => $apiKey,
+         'X-Tenant-Key' => $apiKey,
       ]
    ]);
 
