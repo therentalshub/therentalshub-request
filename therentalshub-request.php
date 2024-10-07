@@ -3,7 +3,7 @@
  * Plugin Name: TheRentalsHub Request
  * Plugin URI: https://www.therentalshub.com
  * Description: Capture booking requests
- * Version: 1.1.1
+ * Version: 1.1.2
  * Requires PHP: 8.0
  * Author: The Rentals Hub
  * License: MIT
