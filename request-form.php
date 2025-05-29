@@ -35,12 +35,24 @@
                 </div>
             </div>
 
-            <div class="row mb-4" style="display:none" id="trhrf_location_wrap">
-                <div class="col">
-                    <label for="trhrf_loc"><?=__('Choose pick-up location', 'therentalshub-request');?></label>
-                    <select class="trh-input-control" name="trhrf_loc" id="trhrf_loc">
-                        <option value="0"></option>
-                    </select>
+            <div  style="display:none" id="trhrf_location_wrap">
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <label for="trhrf_pick_loc"><?=__('Choose pick-up location', 'therentalshub-request');?></label>
+                        <select class="trh-input-control" name="trhrf_pick_loc" id="trhrf_pick_loc">
+                            <option value="0"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <label for="trhrf_drop_loc"><?=__('Choose drop-off location', 'therentalshub-request');?></label>
+                        <select class="trh-input-control" name="trhrf_drop_loc" id="trhrf_drop_loc">
+                            <option value="0"></option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -103,7 +115,8 @@
             <div class="row">
                 <div class="col">
                     <input type="hidden" name="trhrf_car_name" id="trhrf_car_name" value="">
-                    <input type="hidden" name="trhrf_loc_name" id="trhrf_loc_name" value="">
+                    <input type="hidden" name="trhrf_pick_loc_name" id="trhrf_pick_loc_name" value="">
+                    <input type="hidden" name="trhrf_drop_loc_name" id="trhrf_drop_loc_name" value="">
                     <button type="submit" class="trh-button"><?=__('Submit booking request', 'therentalshub-request');?></button>
                 </div>
             </div>

@@ -33,6 +33,10 @@ msgid "Pick-up location"
 msgstr "Pick-up location"
 
 #: email-template-admin.php:27 email-template.php:28
+msgid "Drop-off location"
+msgstr "Drop-off location"
+
+#: email-template-admin.php:27 email-template.php:28
 msgid "Flight nr."
 msgstr "Flight nr."
 
@@ -96,6 +100,10 @@ msgstr "Choose vehicle"
 #: request-form.php:40
 msgid "Choose pick-up location"
 msgstr "Choose pick-up location"
+
+#: request-form.php:51
+msgid "Choose drop-off location"
+msgstr "Choose drop-off location"
 
 #: request-form.php:49
 msgid "Flight number"

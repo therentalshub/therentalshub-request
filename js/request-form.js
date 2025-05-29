@@ -8,14 +8,16 @@ var trhRequestForm = (function($, flatpickr) {
     var endDateEl = null;
     var endTimeEl = null;
     var carEl = null;
-    var locEl = null;
+    var pickLocEl = null;
+    var dropLocEl = null;
     var fnameEl = null;
     var lnameEl = null;
     var emailEl = null;
     var phoneEl = null;
     var notesEl =null;
     var carNameEl = null; // is hidden input
-    var locNameEl = null; // is hidden input
+    var pickLocNameEl = null; // is hidden input
+    var dropLocNameEl = null; // is hidden input
     var flightNameEl = null; // is hidden input
 
     /**
@@ -68,14 +70,16 @@ var trhRequestForm = (function($, flatpickr) {
         endDateEl = $('#trhrf_end_date');
         endTimeEl = $('#trhrf_end_time');
         carEl = $('#trhrf_car');
-        locEl = $('#trhrf_loc');
+        pickLocEl = $('#trhrf_pick_loc');
+        dropLocEl = $('#trhrf_drop_loc');
         fnameEl = $('#trhrf_fname');
         lnameEl = $('#trhrf_lname');
         emailEl = $('#trhrf_email');
         phoneEl = $('#trhrf_phone');
         notesEl = $('#trhrf_notes');
         carNameEl = $('#trhrf_car_name');
-        locNameEl = $('#trhrf_loc_name');
+        pickLocNameEl = $('#trhrf_pick_loc_name');
+        dropLocNameEl = $('#trhrf_drop_loc_name');
         flightNameEl = $('#trhrf_flight');
         
         carWrapEl = $('#trhrf_car_wrap');
@@ -89,9 +93,13 @@ var trhRequestForm = (function($, flatpickr) {
             carNameEl.val(carEl.find('option:selected').text());
         });
 
-        // set event that sets hidden field with location name
-        locEl.on('change', function() {
-            locNameEl.val(locEl.find('option:selected').text());
+        // set events that sets hidden field with location name
+        pickLocEl.on('change', function() {
+            pickLocNameEl.val(pickLocEl.find('option:selected').text());
+        });
+
+        dropLocEl.on('change', function() {
+            dropLocNameEl.val(dropLocEl.find('option:selected').text());
         });
     };
 
@@ -218,7 +226,12 @@ var trhRequestForm = (function($, flatpickr) {
 
             for (i = 0; i < data.length; i++) {
                 
-                locEl.append($('<option>', {
+                pickLocEl.append($('<option>', {
+                    value: data[i].id,
+                    text: data[i].name
+                }));
+
+                dropLocEl.append($('<option>', {
                     value: data[i].id,
                     text: data[i].name
                 }));
@@ -269,14 +282,16 @@ var trhRequestForm = (function($, flatpickr) {
             ed: endDateEl.val(),
             et: endTimeEl.val(),
             car: carEl.val(),
-            loc: locEl.val(),
+            pick: pickLocEl.val(),
+            drop: dropLocEl.val(),
             fname: fnameEl.val(),
             lname: lnameEl.val(),
             email: emailEl.val(),
             phone: phoneEl.val(),
             notes: notesEl.val(),
             carname: carNameEl.val(),
-            locname: locNameEl.val(),
+            plocname: pickLocNameEl.val(),
+            dlocname: dropLocNameEl.val(),
             flightname: flightNameEl.val()
         }, function(data) {
 

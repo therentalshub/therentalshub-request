@@ -3,7 +3,7 @@
  * Plugin Name: TheRentalsHub Request
  * Plugin URI: https://www.therentalshub.com
  * Description: Capture booking requests
- * Version: 1.1.3
+ * Version: 1.1.4
  * Requires PHP: 8.0
  * Author: The Rentals Hub
  * License: MIT
@@ -17,7 +17,7 @@
 const TRHBR_ENVIRONMENT = 'prod';
 const TRHBR_PLUGIN_NAME = 'therentalshub-request';
 const TRHBR_NONCE_CONTEXT = 'XVGBkdV8tL';
-const TRHBR_API_ENDPOINT_DEV = 'http://web-api.vpn.therentalshub.com/requests';
+const TRHBR_API_ENDPOINT_DEV = 'http://fleet-haproxy:9014/requests';
 const TRHBR_API_ENDPOINT_PROD = 'https://web-api.therentalshub.com/requests';
 
 /**
@@ -371,7 +371,7 @@ function trh_register_plugin_scripts()
    $requestJs = 'request-form';
 
    if (TRHBR_ENVIRONMENT != 'dev') {
-      $requestJs = 'request-form-e4Rmd1Kd';
+      $requestJs = 'request-form-fL7v3ckm';
    }
 
    wp_enqueue_script('therentalshub-request', plugins_url(TRHBR_PLUGIN_NAME.'/js/'.$requestJs.'.js'), ['jquery', 'flatpickr'], false, ['strategy' => 'defer', 'in_footer' => true]);
@@ -590,9 +590,9 @@ function processRequest($vars)
 {
    // check for missing vars
    if (!isset($vars->sd) || !isset($vars->st) || !isset($vars->ed) || !isset($vars->et) 
-      || !isset($vars->car) || !isset($vars->loc) || !isset($vars->fname) || !isset($vars->lname) 
+      || !isset($vars->car) || !isset($vars->pick) || !isset($vars->drop) || !isset($vars->fname) || !isset($vars->lname) 
          || !isset($vars->email) || !isset($vars->phone) || !isset($vars->notes) 
-            || !isset($vars->carname) || !isset($vars->locname) || !isset($vars->flightname)) {
+            || !isset($vars->carname) || !isset($vars->plocname) || !isset($vars->dlocname) || !isset($vars->flightname)) {
 
       return __('Missing vars, cannot continue', 'trh');
    }
@@ -662,6 +662,8 @@ function emailTemplate($vars)
    $html = ob_get_contents();
    ob_end_clean();
 
+   var_dump($html);
+
    return $html;
 }
 
@@ -671,6 +673,8 @@ function emailTemplateAdmin($vars)
    require 'email-template-admin.php';
    $html = ob_get_contents();
    ob_end_clean();
+
+   var_dump($html);
 
    return $html;
 }

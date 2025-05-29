@@ -33,6 +33,10 @@ msgid "Pick-up location"
 msgstr "Τοποθεσία παραλαβής"
 
 #: email-template-admin.php:27 email-template.php:28
+msgid "Drop-off location"
+msgstr "Τοποθεσία παράδοσης"
+
+#: email-template-admin.php:27 email-template.php:28
 msgid "Flight nr."
 msgstr "Αριθμός πτήσης."
 
@@ -97,6 +101,10 @@ msgstr "Επιλέξτε όχημα"
 #: request-form.php:40
 msgid "Choose pick-up location"
 msgstr "Επιλέξτε τοποθεσία παραλαβής"
+
+#: request-form.php:51
+msgid "Choose drop-off location"
+msgstr "Επιλέξτε τοποθεσία παράδοσης"
 
 #: request-form.php:49
 msgid "Flight number"

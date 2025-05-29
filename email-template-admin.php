@@ -16,10 +16,16 @@
                 <td><?=htmlentities($vars->carname, ENT_QUOTES);?></td>
             </tr>
             <?php endif; ?>
-            <?php if ($vars->loc != 0): ?>
+            <?php if ($vars->pick != 0): ?>
             <tr>
                 <th><?=__('Pick-up location', 'therentalshub-request');?></th>
-                <td><?=htmlentities($vars->locname, ENT_QUOTES);?></td>
+                <td><?=htmlentities($vars->plocname, ENT_QUOTES);?></td>
+            </tr>
+            <?php endif; ?>
+            <?php if ($vars->drop != 0): ?>
+            <tr>
+                <th><?=__('Drop-off location', 'therentalshub-request');?></th>
+                <td><?=htmlentities($vars->dlocname, ENT_QUOTES);?></td>
             </tr>
             <?php endif; ?>
             <?php if ($vars->flightname != ''): ?>
