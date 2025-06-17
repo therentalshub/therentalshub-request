@@ -107,8 +107,8 @@ msgid "Choose drop-off location"
 msgstr "Επιλέξτε τοποθεσία παράδοσης"
 
 #: request-form.php:49
-msgid "Flight number"
-msgstr "Αριθμός πτήσης"
+msgid "Flight number or ship name"
+msgstr "Αριθμός πτήσης ή όνομα πλοίου"
 
 #: request-form.php:56
 msgid "First name"

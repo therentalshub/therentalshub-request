@@ -93,7 +93,7 @@ msgid "Choose drop-off location"
 msgstr ""
 
 #: request-form.php:49
-msgid "Flight number"
+msgid "Flight number or ship name"
 msgstr ""
 
 #: request-form.php:56

@@ -58,43 +58,43 @@
 
             <div class="row mb-4" style="display:none" id="trhrf_flight_wrap">
                 <div class="col">
-                    <label for="trhrf_flight"><?=__('Flight number', 'therentalshub-request');?></label>
-                    <input type="text" class="trh-input-control" name="trhrf_flight" id="trhrf_flight"/>
+                    <label for="trhrf_flight"><?=__('Flight number or ship name', 'therentalshub-request');?></label>
+                    <input type="text" class="trh-input-control" name="trhrf_flight" id="trhrf_flight" placeholder="<?=__('Flight number or ship name', 'therentalshub-request');?>"/>
                 </div>
             </div>
 
             <div class="row mb-4">
                 <div class="col">
                     <label for="trhrf_fname"><?=__('First name', 'therentalshub-request');?> <span class="trh-required">*</span></label>
-                    <input type="text" class="trh-input-control" name="trhrf_fname" id="trhrf_fname" required/>
+                    <input type="text" class="trh-input-control" name="trhrf_fname" id="trhrf_fname" placeholder="<?=__('First name', 'therentalshub-request');?>" required/>
                 </div>
             </div>
 
             <div class="row mb-4">
                 <div class="col">
                     <label for="trhrf_lname"><?=__('Last name', 'therentalshub-request');?> <span class="trh-required">*</span></label>
-                    <input type="text" class="trh-input-control" name="trhrf_lname" id="trhrf_lname" required/>
+                    <input type="text" class="trh-input-control" name="trhrf_lname" id="trhrf_lname" placeholder="<?=__('Last name', 'therentalshub-request');?>" required/>
                 </div>
             </div>
 
             <div class="row mb-4">
                 <div class="col">
                     <label for="trhrf_email"><?=__('Email address', 'therentalshub-request');?> <span class="trh-required">*</span></label>
-                    <input type="text" class="trh-input-control" name="trhrf_email" id="trhrf_email" required/>
+                    <input type="text" class="trh-input-control" name="trhrf_email" id="trhrf_email" placeholder="<?=__('Email address', 'therentalshub-request');?>" required/>
                 </div>
             </div>
 
             <div class="row mb-4">
                 <div class="col">
                     <label for="trhrf_phone"><?=__('Phone number', 'therentalshub-request');?></label>
-                    <input type="text" class="trh-input-control" name="trhrf_phone" id="trhrf_phone"/>
+                    <input type="text" class="trh-input-control" name="trhrf_phone" id="trhrf_phone" placeholder="<?=__('Phone number', 'therentalshub-request');?>"/>
                 </div>
             </div>
 
             <div class="row mb-4">
                 <div class="col">
                     <label for="trhrf_notes"><?=__('Additional notes', 'therentalshub-request');?></label>
-                    <textarea class="trh-input-control" rows="5" name="trhrf_notes" id="trhrf_notes"></textarea>
+                    <textarea class="trh-input-control" rows="5" name="trhrf_notes" id="trhrf_notes" placeholder="<?=__('Additional notes', 'therentalshub-request');?>"></textarea>
                 </div>
             </div>
 
