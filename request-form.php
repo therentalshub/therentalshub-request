@@ -86,8 +86,8 @@
 
             <div class="row mb-4">
                 <div class="col">
-                    <label for="trhrf_phone"><?=__('Phone number', 'therentalshub-request');?></label>
-                    <input type="text" class="trh-input-control" name="trhrf_phone" id="trhrf_phone" placeholder="<?=__('Phone number', 'therentalshub-request');?>"/>
+                    <label for="trhrf_phone"><?=__('Phone number', 'therentalshub-request');?> <span class="trh-required">*</span></label>
+                    <input type="text" class="trh-input-control" name="trhrf_phone" id="trhrf_phone" placeholder="<?=__('Phone number', 'therentalshub-request');?>" required/>
                 </div>
             </div>
 
