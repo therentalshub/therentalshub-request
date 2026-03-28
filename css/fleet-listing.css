@@ -1,0 +1,153 @@
+.trhrf-fleet-app {
+    --trhrf-primary: #006ce4;
+    --trhrf-primary-hover: #005bbd;
+    --trhrf-accent: #ffb700;
+    --trhrf-success: #00824d;
+    --trhrf-danger: #d93025;
+    --trhrf-bg-light: #f9f9f9;
+    --trhrf-border: #eeeeee;
+    --trhrf-text-main: #1a1a1a;
+    --trhrf-text-light: #666666;
+    --trhrf-radius: 12px;
+    
+    max-width: 1140px;
+    margin: 20px auto;
+    color: var(--trhrf-text-main);
+}
+
+/* Filter Pills */
+.trhrf-filter-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    scrollbar-width: none;
+}
+.trhrf-filter-container::-webkit-scrollbar { display: none; }
+
+.trhrf-category-pill {
+    white-space: nowrap;
+    padding: 10px 22px;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.trhrf-category-pill.trhrf-active {
+    background: var(--trhrf-primary);
+    color: #fff;
+    border-color: var(--trhrf-primary);
+    box-shadow: 0 4px 10px rgba(0,108,228,0.2);
+}
+
+/* Card Layout */
+.trhrf-car-card {
+    display: grid;
+    grid-template-areas: "img" "info" "price";
+    background: #fff;
+    border: 1px solid var(--trhrf-border);
+    border-radius: var(--trhrf-radius);
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+@media (min-width: 768px) {
+    .trhrf-car-card {
+        grid-template-columns: 280px 1fr 240px;
+        grid-template-areas: "img info price";
+    }
+}
+
+.trhrf-car-img-wrap {
+    grid-area: img;
+    background: var(--trhrf-bg-light);
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.trhrf-car-info {
+    grid-area: info;
+    padding: 25px;
+}
+
+.trhrf-car-name { margin: 0 0 20px 0; font-size: 22px; font-weight: 800; }
+.trhrf-car-name span { color: var(--trhrf-text-light); font-weight: 400; font-size: 16px; }
+
+.trhrf-badge-row {
+    margin-bottom: 5px;
+}
+
+.trhrf-badge { 
+    font-size: 10px; 
+    font-weight: 700; 
+    padding: 4px 10px; 
+    border-radius: 4px; 
+    text-transform: uppercase; 
+}
+.trhrf-badge-group { background: #eef5ff; color: var(--trhrf-primary); }
+.trhrf-badge-promo { background: #e8f9f2; color: var(--trhrf-success); }
+
+/* Specs Grid */
+.trhrf-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+}
+
+@media (min-width: 480px) {
+    .trhrf-specs-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.trhrf-spec-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--trhrf-text-light);
+}
+
+/* Pricing Area */
+.trhrf-car-pricing {
+    grid-area: price;
+    padding: 25px;
+    background: #fafafa;
+    border-left: 1px solid var(--trhrf-border);
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.trhrf-rating-pill {
+    display: inline-flex;
+    align-items: center;
+    background: var(--trhrf-accent);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.trhrf-price-value { font-size: 24px; font-weight: 900; color: var(--trhrf-text-main); }
+
+.trhrf-btn-book {
+    background: var(--trhrf-primary);
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.trhrf-btn-book:hover { background: var(--trhrf-primary-hover); }

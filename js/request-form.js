@@ -21,21 +21,6 @@ var trhRequestForm = (function($, flatpickr) {
     var flightNameEl = null; // is hidden input
 
     /**
-     * Box wrapper div for cars select.
-     */
-    var carWrapEl = null;
-
-    /**
-     * Box wrapper div for locations select.
-     */
-    var locWrapEl = null;
-
-    /**
-     * Box wrapper div for flight nr input.
-     */
-    var flightWrapEl = null;
-
-    /**
      * The form.
      */
     var form = null;
@@ -81,10 +66,6 @@ var trhRequestForm = (function($, flatpickr) {
         pickLocNameEl = $('#trhrf_pick_loc_name');
         dropLocNameEl = $('#trhrf_drop_loc_name');
         flightNameEl = $('#trhrf_flight');
-        
-        carWrapEl = $('#trhrf_car_wrap');
-        locWrapEl = $('#trhrf_location_wrap');
-        flightWrapEl = $('#trhrf_flight_wrap');
 
         form = $('#trh-request-form');
 
@@ -101,6 +82,11 @@ var trhRequestForm = (function($, flatpickr) {
         dropLocEl.on('change', function() {
             dropLocNameEl.val(dropLocEl.find('option:selected').text());
         });
+
+        // Trigger change on load to sync hidden fields if values are pre-selected
+        carEl.trigger('change');
+        pickLocEl.trigger('change');
+        dropLocEl.trigger('change');
     };
 
     /**
@@ -148,117 +134,13 @@ var trhRequestForm = (function($, flatpickr) {
     }
 
     /**
-     * Load cars.
-     */
-    var loadCars = function() {
-
-        if (!trhApp.showCars) {
-            return;
-        }
-
-        carWrapEl.css('display', 'block');
-
-        // get from api
-        $.post(trh_ajax_obj.ajax_url, {
-
-            _ajax_nonce: trh_ajax_obj.nonce,
-            action: 'therentalshub_get_cars',
-        }, function(data) {
-
-            if (Object.hasOwn(data, 'error')) {
-                return;
-            }
-
-            // show list or optgroup
-            if (trhApp.carsByGroup) {
-                //
-                let optgroup = '';
-
-                for (i = 0; i < data.length; i++) {
-
-                    optgroup = `<optgroup label="Group: ${data[i].group_name}">`;
-
-                    for (j = 0; j < data[i].cars.length; j++) {
-
-                        optgroup += `<option value="${data[i].cars[j].id}">${data[i].cars[j].name}</option>`;
-                    }
-
-                    optgroup += `</optgroup>`;
-
-                    carEl.append(optgroup);
-                }
-
-
-            } else {
-                
-                for (i = 0; i < data.length; i++) {
-                
-                    carEl.append($('<option>', {
-                        value: data[i].id,
-                        text: data[i].brand + ' ' + data[i].model + ' - ' + data[i].gear
-                    }));
-                }
-            }
-        });
-    };
-
-    /**
-     * Load cars.
-     */
-    var loadLocations = function() {
-
-        if (!trhApp.showLocations) {
-            return;
-        }
-
-        locWrapEl.css('display', 'block');
-
-        // get from api
-        $.post(trh_ajax_obj.ajax_url, {
-
-            _ajax_nonce: trh_ajax_obj.nonce,
-            action: 'therentalshub_get_locations',
-        }, function(data) {
-
-            if (Object.hasOwn(data, 'error')) {
-                return;
-            }
-
-            for (i = 0; i < data.length; i++) {
-                
-                pickLocEl.append($('<option>', {
-                    value: data[i].id,
-                    text: data[i].name
-                }));
-
-                dropLocEl.append($('<option>', {
-                    value: data[i].id,
-                    text: data[i].name
-                }));
-            }
-        });
-    };
-
-    /**
-     * Show/hide flight number field.
-     */
-    var loadFlightNr = function() {
-
-        if (!trhApp.showFlightNr) {
-            return;
-        }
-
-        flightWrapEl.css('display', 'block');
-    };
-
-    /**
      * Submit form.
      */
-    var submitForm = function() {
+    var submitForm = async function() {
 
         // all needed vars filled?
         if (startDateEl.val() === '' || startTimeEl.val() === '' || endDateEl.val() === '' 
-            || endTimeEl.val() === '' || fnameEl.val() === '' || lnameEl.val() === '' || emailEl.val() === '') {
+            || endTimeEl.val() === '' || fnameEl.val() === '' || lnameEl.val() === '' || emailEl.val() === '' || phoneEl.val() === '') {
 
             alert(trhApp.lang.warn_fill_fields);
             return;
@@ -272,41 +154,49 @@ var trhRequestForm = (function($, flatpickr) {
         $('#trh-request-failed-alert').css('display', 'none');
         $('#trh-request-success-alert').css('display', 'none');
 
-        // submit request
-        $.post(trh_ajax_obj.ajax_url, {
+        try {
+            const response = await fetch(trh_ajax_obj.rest_url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-WP-Nonce': trh_ajax_obj.nonce
+                },
+                body: JSON.stringify({
+                    startDate: startDateEl.val(),
+                    startTime: startTimeEl.val(),
+                    endDate: endDateEl.val(),
+                    endTime: endTimeEl.val(),
+                    carId: carEl.val() || '0',
+                    pickLocId: pickLocEl.val() || '0',
+                    dropLocId: dropLocEl.val() || '0',
+                    firstName: fnameEl.val(),
+                    lastName: lnameEl.val(),
+                    email: emailEl.val(),
+                    phone: phoneEl.val(),
+                    notes: notesEl.val(),
+                    carName: carNameEl.val() || '',
+                    pickLocName: pickLocNameEl.val() || '',
+                    dropLocName: dropLocNameEl.val() || '',
+                    flightNumber: flightNameEl.val() || ''
+                })
+            });
 
-            _ajax_nonce: trh_ajax_obj.nonce,
-            action: 'therentalshub_submit_form',
-            sd: startDateEl.val(),
-            st: startTimeEl.val(),
-            ed: endDateEl.val(),
-            et: endTimeEl.val(),
-            car: carEl.val(),
-            pick: pickLocEl.val(),
-            drop: dropLocEl.val(),
-            fname: fnameEl.val(),
-            lname: lnameEl.val(),
-            email: emailEl.val(),
-            phone: phoneEl.val(),
-            notes: notesEl.val(),
-            carname: carNameEl.val(),
-            plocname: pickLocNameEl.val(),
-            dlocname: dropLocNameEl.val(),
-            flightname: flightNameEl.val()
-        }, function(data) {
-
+            const data = await response.json();
             btn.html(btnHtml);
 
-            if (Object.hasOwn(data, 'error')) {
-
+            if (!response.ok) {
                 $('#trh-request-failed-alert').css('display', 'block');
-                $('.trh-error-alert').html(data.error);
-
+                $('.trh-error-alert').html(data.message || 'An error occurred.');
                 return;
             }
 
             $('#trh-request-success-alert').css('display', 'block');
-        });
+            form[0].reset();
+        } catch (err) {
+        btn.html(btnHtml);
+            $('#trh-request-failed-alert').css('display', 'block');
+            $('.trh-error-alert').html('Network error, please try again.');
+        }
     };
 
     /**
@@ -324,15 +214,6 @@ var trhRequestForm = (function($, flatpickr) {
 
         // load datetime pickers
         loadPickers();
-
-        // load cars
-        loadCars();
-
-        // load locations
-        loadLocations();
-
-        // flight number fiuld
-        loadFlightNr();
 
         // form submit event
         form.on('submit', function(e) {
