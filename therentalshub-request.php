@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
   * Globals.
   */
 const TRHBR_PLUGIN_VERSION = '2.0.0';
-const TRHBR_ENVIRONMENT = 'dev';
+const TRHBR_ENVIRONMENT = 'prod';
 const TRHBR_PLUGIN_NAME = 'therentalshub-request';
 const TRHBR_API_ENDPOINT_DEV = 'http://web-api.vpn.therentalshub.com/requests';
 const TRHBR_API_ENDPOINT_PROD = 'https://web-api.therentalshub.com/requests';
