@@ -477,7 +477,7 @@ function trh_request_fleet_listing_shortcode()
          <?php if (!empty($categories)) : ?>
             <?php foreach ($categories as $category) : ?>
                <?php if (in_array($category->name, $active_category_names)) : ?>
-                  <button class="trhrf-category-pill" onclick="trhrfUpdateFilter(this, <?=(int) $car->category_id;?>)"><?php echo esc_html($category->name); ?></button>
+                  <button class="trhrf-category-pill" onclick="trhrfUpdateFilter(this, <?=(int) $category->id;?>)"><?php echo esc_html($category->name); ?></button>
                <?php endif; ?>
          <?php endforeach; ?>
          <?php endif; ?>
