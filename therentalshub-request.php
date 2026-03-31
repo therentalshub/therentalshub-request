@@ -3,7 +3,7 @@
  * Plugin Name: TheRentalsHub Request
  * Plugin URI: https://www.therentalshub.com
  * Description: Capture booking requests
- * Version: 1.1.8
+ * Version: 2.0.2
  * Requires PHP: 8.0
  * Author: The Rentals Hub
  * License: MIT
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
  /**
   * Globals.
   */
-const TRHBR_PLUGIN_VERSION = '2.0.0';
+const TRHBR_PLUGIN_VERSION = '2.0.2';
 const TRHBR_ENVIRONMENT = 'prod';
 const TRHBR_PLUGIN_NAME = 'therentalshub-request';
 const TRHBR_API_ENDPOINT_DEV = 'http://web-api.vpn.therentalshub.com/requests';
@@ -32,7 +32,7 @@ const TRHBR_API_ENDPOINT_PROD = 'https://web-api.therentalshub.com/requests';
 require_once plugin_dir_path(__FILE__).'plugin-update-checker/plugin-update-checker.php';
 
 $myUpdateChecker = PucFactory::buildUpdateChecker(
-    'https://github.com/therentalshub/therentalshub-request', 
+    'https://github.com/therentalshub/therentalshub-request/', 
     __FILE__, 
     TRHBR_PLUGIN_NAME
 );
