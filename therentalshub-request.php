@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
   * Globals.
   */
 const TRHBR_PLUGIN_VERSION = '2.0.2';
-const TRHBR_ENVIRONMENT = 'prod';
+const TRHBR_ENVIRONMENT = 'dev';
 const TRHBR_PLUGIN_NAME = 'therentalshub-request';
 const TRHBR_API_ENDPOINT_DEV = 'http://web-api.vpn.therentalshub.com/requests';
 const TRHBR_API_ENDPOINT_PROD = 'https://web-api.therentalshub.com/requests';
@@ -559,13 +559,13 @@ add_shortcode('trh_request_fleet', 'trh_request_fleet_listing_shortcode');
 function trh_get_cars_list()
 {
    // transients to bypass external API latency
-   $transient_key = 'trhrf_cars_list_cache';
+   /*$transient_key = 'trhrf_cars_list_cache';
 
    $cached_data = get_transient($transient_key);
    
    if (false !== $cached_data) {
       return new WP_REST_Response($cached_data, 200);
-   }
+   }*/
 
    $options = get_option('trh_options');
    $apiKey = isset($options['trh_api_key']) ? $options['trh_api_key'] : '';
@@ -584,7 +584,7 @@ function trh_get_cars_list()
    
    $data = json_decode(wp_remote_retrieve_body($response));
    
-   set_transient($transient_key, $data, 3600);
+   //set_transient($transient_key, $data, 3600);
 
    return new WP_REST_Response($data, 200);
 }
@@ -595,13 +595,13 @@ function trh_get_cars_list()
 function trh_get_locations_list()
 {
    // transients to bypass external API latency
-   $transient_key = 'trhrf_locations_list_cache';
+   /*$transient_key = 'trhrf_locations_list_cache';
 
    $cached_data = get_transient($transient_key);
    
    if (false !== $cached_data) {
       return new WP_REST_Response($cached_data, 200);
-   }
+   }*/
 
    $options = get_option('trh_options');
    $apiKey = isset($options['trh_api_key']) ? $options['trh_api_key'] : '';
@@ -620,7 +620,7 @@ function trh_get_locations_list()
    
    $data = json_decode(wp_remote_retrieve_body($response));
    
-   set_transient($transient_key, $data, 3600);
+   //set_transient($transient_key, $data, 3600);
 
    return new WP_REST_Response($data, 200);
 }
@@ -631,13 +631,13 @@ function trh_get_locations_list()
 function trh_get_categories_listing()
 {
    // transients to bypass external API latency
-   $transient_key = 'trhrf_categories_list_cache';
+   /*$transient_key = 'trhrf_categories_list_cache';
 
    $cached_data = get_transient($transient_key);
    
    if (false !== $cached_data) {
       return new WP_REST_Response($cached_data, 200);
-   }
+   }*/
 
    $options = get_option('trh_options');
    $apiKey = isset($options['trh_api_key']) ? $options['trh_api_key'] : '';
@@ -656,7 +656,7 @@ function trh_get_categories_listing()
    
    $data = json_decode(wp_remote_retrieve_body($response));
    
-   set_transient($transient_key, $data, 3600);
+   //set_transient($transient_key, $data, 3600);
 
    return new WP_REST_Response($data, 200);
 }
@@ -667,13 +667,13 @@ function trh_get_categories_listing()
 function trh_get_fleet_listing()
 {
    // transients to bypass external API latency
-   $transient_key = 'trhrf_fleet_list_cache';
+   /*$transient_key = 'trhrf_fleet_list_cache';
 
    $cached_data = get_transient($transient_key);
    
    if (false !== $cached_data) {
       return new WP_REST_Response($cached_data, 200);
-   }
+   }*/
 
    $options = get_option('trh_options');
    $apiKey = isset($options['trh_api_key']) ? $options['trh_api_key'] : '';
@@ -692,7 +692,7 @@ function trh_get_fleet_listing()
    
    $data = json_decode(wp_remote_retrieve_body($response));
    
-   set_transient($transient_key, $data, 3600);
+   //set_transient($transient_key, $data, 3600);
 
    return new WP_REST_Response($data, 200);
 }
