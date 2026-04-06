@@ -15,10 +15,7 @@ var trhRequestForm = (function($, flatpickr) {
     var emailEl = null;
     var phoneEl = null;
     var notesEl =null;
-    var carNameEl = null; // is hidden input
-    var pickLocNameEl = null; // is hidden input
-    var dropLocNameEl = null; // is hidden input
-    var flightNameEl = null; // is hidden input
+    var flightNameEl = null;
 
     /**
      * The form.
@@ -31,19 +28,9 @@ var trhRequestForm = (function($, flatpickr) {
     var sdCal = null;
 
     /**
-     * Start time picker.
-     */
-    var stCal = null;
-
-    /**
      * End date picker.
      */
     var edCal = null;
-
-    /**
-     * End time picker.
-     */
-    var etCal = null;
 
     /**
      * Load form elements
@@ -62,31 +49,9 @@ var trhRequestForm = (function($, flatpickr) {
         emailEl = $('#trhrf_email');
         phoneEl = $('#trhrf_phone');
         notesEl = $('#trhrf_notes');
-        carNameEl = $('#trhrf_car_name');
-        pickLocNameEl = $('#trhrf_pick_loc_name');
-        dropLocNameEl = $('#trhrf_drop_loc_name');
         flightNameEl = $('#trhrf_flight');
 
         form = $('#trh-request-form');
-
-        // set event that sets hidden field with car name
-        carEl.on('change', function() {
-            carNameEl.val(carEl.find('option:selected').text());
-        });
-
-        // set events that sets hidden field with location name
-        pickLocEl.on('change', function() {
-            pickLocNameEl.val(pickLocEl.find('option:selected').text());
-        });
-
-        dropLocEl.on('change', function() {
-            dropLocNameEl.val(dropLocEl.find('option:selected').text());
-        });
-
-        // Trigger change on load to sync hidden fields if values are pre-selected
-        carEl.trigger('change');
-        pickLocEl.trigger('change');
-        dropLocEl.trigger('change');
     };
 
     /**
@@ -129,8 +94,8 @@ var trhRequestForm = (function($, flatpickr) {
         };
 
         // setup time pickers
-        stCal = startTimeEl.flatpickr(opts);
-        etCal = endTimeEl.flatpickr(opts);
+        startTimeEl.flatpickr(opts);
+        endTimeEl.flatpickr(opts);
     }
 
     /**
@@ -174,9 +139,9 @@ var trhRequestForm = (function($, flatpickr) {
                     email: emailEl.val(),
                     phone: phoneEl.val(),
                     notes: notesEl.val(),
-                    carName: carNameEl.val() || '',
-                    pickLocName: pickLocNameEl.val() || '',
-                    dropLocName: dropLocNameEl.val() || '',
+                    carName: carEl.find('option:selected').text() || '',
+                    pickLocName: pickLocEl.find('option:selected').text() || '',
+                    dropLocName: dropLocEl.find('option:selected').text() || '',
                     flightNumber: flightNameEl.val() || ''
                 })
             });

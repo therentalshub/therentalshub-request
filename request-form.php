@@ -106,9 +106,6 @@
             </div>
 
             <div class="trh-field-row">
-                <input type="hidden" name="trhrf_car_name" id="trhrf_car_name" value="">
-                <input type="hidden" name="trhrf_pick_loc_name" id="trhrf_pick_loc_name" value="">
-                <input type="hidden" name="trhrf_drop_loc_name" id="trhrf_drop_loc_name" value="">
                 <button type="submit" class="trh-button"><?=__('Submit booking request', 'therentalshub-request');?></button>
             </div>
         </form>
@@ -117,10 +114,6 @@
             var trhApp = {
                 minDays: <?=$trhMinDays;?>,
                 defaultTime: "<?=$trhDefaultTime;?>",
-                showCars: <?=$trhShowCars;?>,
-                carsByGroup: <?=$trhCarsByGroup;?>,
-                showLocations: <?=$trhShowLocations;?>,
-                showFlightNr: <?=$trhShowFlightNr;?>,
                 lang: {
                     warn_fill_fields: "<?=__('Please fill all required (with the asterisk) fields.', 'therentalshub-request');?>",
                     please_wait: "<?=__('Please wait', 'therentalshub-request');?>"
