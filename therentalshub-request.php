@@ -3,7 +3,7 @@
  * Plugin Name: TheRentalsHub Request
  * Plugin URI: https://www.therentalshub.com
  * Description: Capture booking requests
- * Version: 2.0.2
+ * Version: 2.0.3
  * Requires PHP: 8.0
  * Author: The Rentals Hub
  * License: MIT
@@ -20,8 +20,8 @@ if (!defined('ABSPATH')) {
  /**
   * Globals.
   */
-const TRHBR_PLUGIN_VERSION = '2.0.2';
-const TRHBR_ENVIRONMENT = 'dev';
+const TRHBR_PLUGIN_VERSION = '2.0.3';
+const TRHBR_ENVIRONMENT = 'prod';
 const TRHBR_PLUGIN_NAME = 'therentalshub-request';
 const TRHBR_API_ENDPOINT_DEV = 'http://web-api.vpn.therentalshub.com/requests';
 const TRHBR_API_ENDPOINT_PROD = 'https://web-api.therentalshub.com/requests';
@@ -361,7 +361,7 @@ add_action('wp_enqueue_scripts', function () {
    // register js
    wp_register_script('flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js', ['jquery'], [], TRHBR_PLUGIN_VERSION, ['in_footer' => true]);
 
-   $requestJs = (TRHBR_ENVIRONMENT == 'dev') ? 'request-form' : 'request-form-fL7v3ckm';
+   $requestJs = (TRHBR_ENVIRONMENT == 'dev') ? 'request-form' : 'request-form-cdM3fRc9';
 
    wp_register_script('therentalshub-request', plugins_url(TRHBR_PLUGIN_NAME . '/js/' . $requestJs . '.js'), ['jquery', 'flatpickr'], [], TRHBR_PLUGIN_VERSION, ['strategy' => 'defer', 'in_footer' => true]);
 
