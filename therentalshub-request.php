@@ -3,7 +3,7 @@
  * Plugin Name: TheRentalsHub Request
  * Plugin URI: https://www.therentalshub.com
  * Description: Capture booking requests
- * Version: 2.0.3
+ * Version: 2.0.4
  * Requires PHP: 8.0
  * Author: The Rentals Hub
  * License: MIT
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
  /**
   * Globals.
   */
-const TRHBR_PLUGIN_VERSION = '2.0.3';
+const TRHBR_PLUGIN_VERSION = '2.0.4';
 const TRHBR_ENVIRONMENT = 'prod';
 const TRHBR_PLUGIN_NAME = 'therentalshub-request';
 const TRHBR_API_ENDPOINT_DEV = 'http://web-api.vpn.therentalshub.com/requests';
@@ -359,11 +359,11 @@ add_action('wp_enqueue_scripts', function () {
    wp_register_style('flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css');
 
    // register js
-   wp_register_script('flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js', ['jquery'], [], TRHBR_PLUGIN_VERSION, ['in_footer' => true]);
+   wp_register_script('flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js', ['jquery'], TRHBR_PLUGIN_VERSION, ['in_footer' => true]);
 
    $requestJs = (TRHBR_ENVIRONMENT == 'dev') ? 'request-form' : 'request-form-cdM3fRc9';
 
-   wp_register_script('therentalshub-request', plugins_url(TRHBR_PLUGIN_NAME . '/js/' . $requestJs . '.js'), ['jquery', 'flatpickr'], [], TRHBR_PLUGIN_VERSION, ['strategy' => 'defer', 'in_footer' => true]);
+   wp_register_script('therentalshub-request', plugins_url(TRHBR_PLUGIN_NAME . '/js/' . $requestJs . '.js'), ['jquery', 'flatpickr'], TRHBR_PLUGIN_VERSION, ['strategy' => 'defer', 'in_footer' => true]);
 
    wp_localize_script(
       'therentalshub-request',
@@ -806,6 +806,7 @@ function processRequest($vars)
  */
 function emailTemplate($vars)
 {
+   $vars = (object) $vars;
    ob_start();
    require 'email-template.php';
    $html = ob_get_contents();
@@ -816,6 +817,7 @@ function emailTemplate($vars)
 
 function emailTemplateAdmin($vars)
 {
+   $vars = (object) $vars;
    ob_start();
    require 'email-template-admin.php';
    $html = ob_get_contents();
